@@ -32,13 +32,14 @@ class PlanPageManager:
 
     IMAGE_EXT = {".jpg", ".jpeg", ".png", ".bmp", ".gif"}
     PDF_EXT = {".pdf"}
+    SCALE_FACTOR = 1.3  # Factor to reduce image size for thumbnails
 
     def __init__(self, main_window, config: Config):
         self.main_window = main_window
         self.config = config
         self.ui = main_window.ui
         self._current_fullscreen = None
-
+ 
         try:
             # Prepare the scroll area that will contain thumbnails
             self._prepare_ui()
@@ -105,7 +106,7 @@ class PlanPageManager:
                 pix = QPixmap(str(f))
                 if not pix.isNull():
 
-                    thumb = pix.scaled(self.ui.plan_page.width() // 1.3, self.ui.plan_page.height(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
+                    thumb = pix.scaled(self.ui.plan_page.width() // self.SCALE_FACTOR, self.ui.plan_page.height(), Qt.KeepAspectRatio, Qt.SmoothTransformation)
                     lbl.setPixmap(thumb)
                 else:
                     lbl.setText(f.name)

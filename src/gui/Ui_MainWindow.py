@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainframeLiTtBB.ui'
+## Form generated from reading UI file 'MainframeBCDoER.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.1
 ##
@@ -434,6 +434,15 @@ class Ui_MainWindow(object):
         self.main_frame.addWidget(self.qlc_page)
         self.setup_page = QWidget()
         self.setup_page.setObjectName(u"setup_page")
+        self.setup_page.setStyleSheet(u"QLabel{\n"
+"	font-size: 20px;\n"
+"	font-weight: bold;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"	font-size: 20px;\n"
+"	font-weight: bold;\n"
+"}")
         self.verticalLayout = QVBoxLayout(self.setup_page)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.screen_size_layout = QFormLayout()
@@ -640,7 +649,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.main_frame.setCurrentIndex(2)
+        self.main_frame.setCurrentIndex(5)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
