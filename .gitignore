@@ -16,7 +16,7 @@ build/
 Mainframe.ui
 img/*
 !img/Unicorn.png
-Icons/*
-!Icons/.gitkeep
 plans/*
 !plans/.gitkeep
+logs/*
+!logs/.gitkeep
