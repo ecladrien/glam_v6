@@ -1,0 +1,38 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/file-plus_white.svg</file>
+    <file>icons/file-plus_red.svg</file>
+    <file>icons/folder-plus_white.svg</file>
+    <file>icons/folder-plus_red.svg</file>
+    <file>icons/folder-minus_white.svg</file>
+    <file>icons/folder-minus_red.svg</file>
+    <file>icons/zap_white.svg</file>
+    <file>icons/zap_red.svg</file>
+    <file>icons/video_white.svg</file>
+    <file>icons/video_red.svg</file>
+    <file>icons/tool_white.svg</file>
+    <file>icons/tool_red.svg</file>
+    <file>icons/stop_white.svg</file>
+    <file>icons/stop_red.svg</file>
+    <file>icons/sliders_white.svg</file>
+    <file>icons/sliders_red.svg</file>
+    <file>icons/settings_white.svg</file>
+    <file>icons/settings_red.svg</file>
+    <file>icons/save_white.svg</file>
+    <file>icons/save_red.svg</file>
+    <file>icons/refresh-cw_white.svg</file>
+    <file>icons/refresh-cw_red.svg</file>
+    <file>icons/power_white.svg</file>
+    <file>icons/power_red.svg</file>
+    <file>icons/play_white.svg</file>
+    <file>icons/play_red.svg</file>
+    <file>icons/plan_white.svg</file>
+    <file>icons/plan_red.svg</file>
+    <file>icons/home_white.svg</file>
+    <file>icons/home_red.svg</file>
+    <file>icons/delete_white.svg</file>
+    <file>icons/delete_red.svg</file>
+    <file>icons/archive_white.svg</file>
+    <file>icons/archive_red.svg</file>
+  </qresource>
+</RCC>

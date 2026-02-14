@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainframeOAXwxR.ui'
+## Form generated from reading UI file 'MainframexAqaqB.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.1
 ##
@@ -17,8 +17,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QGridLayout,
     QHBoxLayout, QLabel, QLineEdit, QMainWindow,
-    QPushButton, QScrollArea, QSizePolicy, QStackedWidget,
-    QVBoxLayout, QWidget)
+    QPushButton, QSizePolicy, QStackedWidget, QVBoxLayout,
+    QWidget)
+import ressources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -65,7 +66,9 @@ class Ui_MainWindow(object):
 "\n"
 "#time_label {\n"
 "	color:red;\n"
-"}")
+"}\n"
+"\n"
+"")
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.main_bar = QWidget(self.centralwidget)
@@ -84,12 +87,20 @@ class Ui_MainWindow(object):
         self.plan_button.setObjectName(u"plan_button")
         self.plan_button.setMaximumSize(QSize(100, 100))
         self.plan_button.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.plan_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/plan_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}")
 
         self.gridLayout.addWidget(self.plan_button, 1, 0, 1, 1)
 
         self.qlc_button = QPushButton(self.side_frame)
         self.qlc_button.setObjectName(u"qlc_button")
         self.qlc_button.setMaximumSize(QSize(100, 100))
+        self.qlc_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/sliders_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}")
 
         self.gridLayout.addWidget(self.qlc_button, 4, 0, 1, 1)
 
@@ -99,6 +110,10 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setBold(True)
         self.setup_button.setFont(font)
+        self.setup_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/settings_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}")
 
         self.gridLayout.addWidget(self.setup_button, 5, 0, 1, 1)
 
@@ -106,18 +121,37 @@ class Ui_MainWindow(object):
         self.home_button.setObjectName(u"home_button")
         self.home_button.setMinimumSize(QSize(0, 0))
         self.home_button.setMaximumSize(QSize(100, 100))
+        self.home_button.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.home_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/home_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    qproperty-icon: url(:/icons/icons/home_white.svg);\n"
+"	qproperty-iconSize: 50px 50px;\n"
+"}")
+        self.home_button.setIconSize(QSize(30, 30))
 
         self.gridLayout.addWidget(self.home_button, 0, 0, 1, 1)
 
         self.cam_button = QPushButton(self.side_frame)
         self.cam_button.setObjectName(u"cam_button")
         self.cam_button.setMaximumSize(QSize(100, 100))
+        self.cam_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/video_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}")
 
         self.gridLayout.addWidget(self.cam_button, 3, 0, 1, 1)
 
         self.measurement_button = QPushButton(self.side_frame)
         self.measurement_button.setObjectName(u"measurement_button")
         self.measurement_button.setMaximumSize(QSize(100, 100))
+        self.measurement_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/zap_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}")
 
         self.gridLayout.addWidget(self.measurement_button, 2, 0, 1, 1)
 
@@ -142,11 +176,15 @@ class Ui_MainWindow(object):
         self.button_home_page_widget.setMaximumSize(QSize(16777215, 120))
         self.horizontalLayout_3 = QHBoxLayout(self.button_home_page_widget)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 12)
         self.restart_button = QPushButton(self.button_home_page_widget)
         self.restart_button.setObjectName(u"restart_button")
         self.restart_button.setMinimumSize(QSize(0, 100))
         self.restart_button.setMaximumSize(QSize(100, 16777215))
+        self.restart_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/refresh-cw_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}")
 
         self.horizontalLayout_3.addWidget(self.restart_button)
 
@@ -154,6 +192,10 @@ class Ui_MainWindow(object):
         self.shutdown_button.setObjectName(u"shutdown_button")
         self.shutdown_button.setMinimumSize(QSize(0, 100))
         self.shutdown_button.setMaximumSize(QSize(100, 16777215))
+        self.shutdown_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/power_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}")
 
         self.horizontalLayout_3.addWidget(self.shutdown_button)
 
@@ -166,26 +208,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4 = QHBoxLayout(self.plan_page)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
-        self.scrollArea = QScrollArea(self.plan_page)
-        self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setStyleSheet(u"border: none;")
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.scrollAreaWidgetContents = QWidget()
-        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 811, 924))
-        self.horizontalLayout_5 = QHBoxLayout(self.scrollAreaWidgetContents)
-        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_2 = QGridLayout()
-        self.gridLayout_2.setObjectName(u"gridLayout_2")
-
-        self.horizontalLayout_5.addLayout(self.gridLayout_2)
-
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
-
-        self.horizontalLayout_4.addWidget(self.scrollArea)
-
         self.main_frame.addWidget(self.plan_page)
         self.measurement_page = QWidget()
         self.measurement_page.setObjectName(u"measurement_page")
@@ -332,24 +354,44 @@ class Ui_MainWindow(object):
         self.measurement_start_button = QPushButton(self.measurement_button_widget)
         self.measurement_start_button.setObjectName(u"measurement_start_button")
         self.measurement_start_button.setMaximumSize(QSize(200, 150))
+        self.measurement_start_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/play_red.svg);\n"
+"    qproperty-iconSize: 50px 50px;\n"
+"}\n"
+"")
 
         self.horizontalLayout_12.addWidget(self.measurement_start_button)
 
         self.measurement_stop_button = QPushButton(self.measurement_button_widget)
         self.measurement_stop_button.setObjectName(u"measurement_stop_button")
         self.measurement_stop_button.setMaximumSize(QSize(200, 150))
+        self.measurement_stop_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/stop_red.svg);\n"
+"    qproperty-iconSize: 50px 50px;\n"
+"}\n"
+"")
 
         self.horizontalLayout_12.addWidget(self.measurement_stop_button)
 
         self.measurement_reset_button = QPushButton(self.measurement_button_widget)
         self.measurement_reset_button.setObjectName(u"measurement_reset_button")
         self.measurement_reset_button.setMaximumSize(QSize(200, 150))
+        self.measurement_reset_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/refresh-cw_red.svg);\n"
+"    qproperty-iconSize: 50px 50px;\n"
+"}\n"
+"")
 
         self.horizontalLayout_12.addWidget(self.measurement_reset_button)
 
         self.measurement_savegraph_button = QPushButton(self.measurement_button_widget)
         self.measurement_savegraph_button.setObjectName(u"measurement_savegraph_button")
         self.measurement_savegraph_button.setMaximumSize(QSize(200, 150))
+        self.measurement_savegraph_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/archive_red.svg);\n"
+"    qproperty-iconSize: 50px 50px;\n"
+"}\n"
+"")
 
         self.horizontalLayout_12.addWidget(self.measurement_savegraph_button)
 
@@ -474,6 +516,11 @@ class Ui_MainWindow(object):
         self.plan_charge_button.setObjectName(u"plan_charge_button")
         self.plan_charge_button.setMinimumSize(QSize(100, 100))
         self.plan_charge_button.setMaximumSize(QSize(100, 16777215))
+        self.plan_charge_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/folder-plus_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}\n"
+"")
 
         self.plan_layout.addWidget(self.plan_charge_button, 0, 1, 1, 1)
 
@@ -481,6 +528,11 @@ class Ui_MainWindow(object):
         self.plan_delete_button.setObjectName(u"plan_delete_button")
         self.plan_delete_button.setMinimumSize(QSize(100, 100))
         self.plan_delete_button.setMaximumSize(QSize(100, 16777215))
+        self.plan_delete_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/folder-minus_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}\n"
+"")
 
         self.plan_layout.addWidget(self.plan_delete_button, 0, 2, 1, 1)
 
@@ -495,6 +547,11 @@ class Ui_MainWindow(object):
         self.background_img_choose_button.setObjectName(u"background_img_choose_button")
         self.background_img_choose_button.setMinimumSize(QSize(100, 100))
         self.background_img_choose_button.setMaximumSize(QSize(100, 16777215))
+        self.background_img_choose_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/file-plus_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}\n"
+"")
 
         self.plan_layout.addWidget(self.background_img_choose_button, 1, 1, 1, 1)
 
@@ -516,6 +573,11 @@ class Ui_MainWindow(object):
         self.reset_setup_button.setObjectName(u"reset_setup_button")
         self.reset_setup_button.setMinimumSize(QSize(0, 100))
         self.reset_setup_button.setMaximumSize(QSize(100, 16777215))
+        self.reset_setup_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/refresh-cw_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}\n"
+"")
 
         self.horizontalLayout_6.addWidget(self.reset_setup_button)
 
@@ -523,6 +585,11 @@ class Ui_MainWindow(object):
         self.save_setup_button.setObjectName(u"save_setup_button")
         self.save_setup_button.setMinimumSize(QSize(0, 100))
         self.save_setup_button.setMaximumSize(QSize(100, 16777215))
+        self.save_setup_button.setStyleSheet(u"QPushButton {\n"
+"    qproperty-icon: url(:/icons/icons/archive_red.svg);\n"
+"    qproperty-iconSize: 30px 30px;\n"
+"}\n"
+"")
 
         self.horizontalLayout_6.addWidget(self.save_setup_button)
 
@@ -560,7 +627,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.main_frame.setCurrentIndex(0)
+        self.main_frame.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

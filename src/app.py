@@ -10,7 +10,6 @@ def main() -> None:
     try:
         config = Config.load_default()
         logger.info("GLAM starting")
-        logger.info(f"Config loaded: screen_width={config.screen_width} screen_height={config.screen_height}")
 
         # Initialiser l'application Qt
         app = QApplication(sys.argv)

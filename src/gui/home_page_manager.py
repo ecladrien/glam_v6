@@ -37,16 +37,12 @@ class HomePageManager:
                 return
 
             label = self.ui.background_image
-            # si label n'a pas encore de taille correcte, autoriser le scaledContents
-            if label.width() <= 1 or label.height() <= 1:
-                label.setScaledContents(True)
-                label.setPixmap(pix)
-            else:
-                label.setScaledContents(False)
-                w = max(1, label.width())
-                h = max(1, label.height())
-                scaled = pix.scaled(w, h, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-                label.setPixmap(scaled)
+
+            label.setScaledContents(False)
+            w = max(1, (label.width()*2.5))
+            h = max(1, (label.height()*2.5))
+            scaled = pix.scaled(w, h, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            label.setPixmap(scaled)
         except Exception as e:
             if hasattr(self.main_window, 'set_log_text'):
                 self.main_window.set_log_text(f"Erreur affichage home_page: {e}")

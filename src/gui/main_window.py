@@ -1,11 +1,13 @@
+from config.manager import Config
 from pathlib import Path
 from PySide6.QtCore import Qt, QTimer, QDateTime
 from gui.setup_page_manager import SetupPageManager
 from gui.home_page_manager import HomePageManager
+from gui.plan_page_manager import PlanPageManager
+from gui.measurement_page_managment import MeasurementPageManager
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QMainWindow
 from gui.Ui_MainWindow import Ui_MainWindow
-from config.manager import Config
 
 
 class MainWindow(QMainWindow):
@@ -54,20 +56,29 @@ class MainWindow(QMainWindow):
         except Exception as e:
             self.set_log_text(f"Erreur timer horloge: {e}")
 
-
-
-        # Initialiser la gestion de la setup_page
+        # Initialiser la gestion de la home_page
         try:
             self.home_page_manager = HomePageManager(self, self.cfg)
         except Exception as e:
             self.set_log_text(f"Erreur home_page: {e}")
+
+        # Initialiser la gestion des plans (thumbnails et affichage plein écran)
+        try:
+            self.plan_page_manager = PlanPageManager(self, self.cfg)
+        except Exception as e:
+            self.set_log_text(f"Erreur plan_page: {e}")
+
+        # Initialiser la gestion de la measurement_page
+        try:
+            self.measurement_page_manager = MeasurementPageManager(self, self.cfg)
+        except Exception as e:
+            self.set_log_text(f"Erreur measurement_page: {e}")
 
         # Initialiser la gestion de la setup_page
         try:
             self.setup_page_manager = SetupPageManager(self, self.cfg)
         except Exception as e:
             self.set_log_text(f"Erreur setup_page: {e}")
-
         
     def _update_time_label(self):
         try:
