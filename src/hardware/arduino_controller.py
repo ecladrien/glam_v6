@@ -31,7 +31,7 @@ except Exception:
     SerialManager = None
     _HAS_NANPY = False
 
-from config.manager import Config
+from ..config.manager import Config
 
 logger = logging.getLogger(__name__)
 

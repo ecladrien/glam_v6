@@ -1,13 +1,13 @@
-from config.manager import Config
+from ..config.manager import Config
 from pathlib import Path
 from PySide6.QtCore import Qt, QTimer, QDateTime
-from gui.setup_page_manager import SetupPageManager
-from gui.home_page_manager import HomePageManager
-from gui.plan_page_manager import PlanPageManager
-from gui.measurement_page_managment import MeasurementPageManager
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QMainWindow
-from gui.Ui_MainWindow import Ui_MainWindow
+from .setup_page_manager import SetupPageManager
+from .home_page_manager import HomePageManager
+from .plan_page_manager import PlanPageManager
+from .measurement_page_managment import MeasurementPageManager
+from .Ui_MainWindow import Ui_MainWindow
 
 
 class MainWindow(QMainWindow):

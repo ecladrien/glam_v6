@@ -1,4 +1,4 @@
-from config.manager import Config
+from ..config.manager import Config
 
 
 

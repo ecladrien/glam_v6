@@ -1,4 +1,4 @@
-from config.manager import Config
+from ..config.manager import Config
 from PySide6.QtWidgets import QApplication
 from PySide6.QtCore import Qt, QProcess
 from pathlib import Path

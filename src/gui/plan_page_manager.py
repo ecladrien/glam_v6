@@ -1,5 +1,5 @@
 from __future__ import annotations
-from config.manager import Config
+from ..config.manager import Config
 from pathlib import Path
 from typing import List
 

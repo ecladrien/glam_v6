@@ -1,8 +1,8 @@
 import sys
 from PySide6.QtWidgets import QApplication
-from utils.logging_config import setup_logging
-from config.manager import Config
-from gui.main_window import MainWindow
+from .utils.logging_config import setup_logging
+from .config.manager import Config
+from .gui.main_window import MainWindow
 
 
 def main() -> None:
