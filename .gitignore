@@ -20,3 +20,4 @@ plans/*
 !plans/.gitkeep
 logs/*
 !logs/.gitkeep
+.env
