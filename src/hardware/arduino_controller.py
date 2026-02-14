@@ -55,7 +55,7 @@ class ArduinoController:
 
         # Paths
         self.data_file = Path(getattr(self.config, "data_file", "data/measurements.csv"))
-        self.arduino_port = getattr(self.config, "arduino_port", "/dev/ttyACM0")
+        self.arduino_port = getattr(self.config, "arduino_port", "/dev/cu.usbmodem1101")
 
         # State
         self._serial = None
@@ -69,7 +69,6 @@ class ArduinoController:
 
         # Last read values
         self._last_values: Dict[str, float | str] = {k: 0 for k in self.FIELDNAMES}
-
         # Try to connect now (non-fatal)
         if _HAS_NANPY:
             try:

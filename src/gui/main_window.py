@@ -8,6 +8,9 @@ from .home_page_manager import HomePageManager
 from .plan_page_manager import PlanPageManager
 from .measurement_page_managment import MeasurementPageManager
 from .Ui_MainWindow import Ui_MainWindow
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class MainWindow(QMainWindow):
@@ -23,10 +26,11 @@ class MainWindow(QMainWindow):
         # Appliquer la taille de fenêtre depuis la config si disponible
         if config is not None:
             try:
-                if getattr(config, "screen_width", None) and getattr(config, "screen_height", None):
-                    self.resize(int(config.screen_width), int(config.screen_height))
+                if getattr(config.display, "screen_width", None) and getattr(config.display, "screen_height", None):
+                    self.resize(int(config.display.screen_width), int(config.display.screen_height))
             except Exception:
-                pass
+                if hasattr(self, 'set_log_text'):
+                    self.set_log_text("Erreur application taille fenêtre depuis config - vérifier les valeurs de screen_width et screen_height")
 
         # Connecter les boutons de la barre latérale aux pages correspondantes
         try:
@@ -37,7 +41,9 @@ class MainWindow(QMainWindow):
             self.ui.qlc_button.clicked.connect(lambda: self.ui.main_frame.setCurrentWidget(self.ui.qlc_page))
             self.ui.setup_button.clicked.connect(lambda: self.ui.main_frame.setCurrentWidget(self.ui.setup_page))
         except Exception:
-            pass
+            if hasattr(self, 'set_log_text'):
+                    self.set_log_text("Erreur connexion boutons de navigation - vérifier que les boutons et pages existent dans le .ui")
+
 
         # Charger l'image de la page d'accueil: `head_img` sinon `default_img`.
         try:
@@ -45,7 +51,8 @@ class MainWindow(QMainWindow):
             self.head_path = Path(self.cfg.head_img)
             self.default_path = Path(self.cfg.default_img)
         except Exception:
-            pass
+            if hasattr(self, 'set_log_text'):
+                    self.set_log_text("Erreur chargement paths.head_img/default_img depuis config - vérifier les valeurs dans la config")
 
         # Affichage de la date et l'heure dans le time label
         try:
@@ -54,31 +61,32 @@ class MainWindow(QMainWindow):
             self._timer_time.timeout.connect(self._update_time_label)
             self._timer_time.start(1000)
         except Exception as e:
-            self.set_log_text(f"Erreur timer horloge: {e}")
+            if hasattr(self, 'set_log_text'):
+                self.set_log_text(f"Erreur timer horloge: {e}")
 
         # Initialiser la gestion de la home_page
         try:
             self.home_page_manager = HomePageManager(self, self.cfg)
         except Exception as e:
-            self.set_log_text(f"Erreur home_page: {e}")
+            logger.exception("Erreur affichage home_page: %s", e)
 
         # Initialiser la gestion des plans (thumbnails et affichage plein écran)
         try:
             self.plan_page_manager = PlanPageManager(self, self.cfg)
         except Exception as e:
-            self.set_log_text(f"Erreur plan_page: {e}")
+            logger.exception("Erreur affichage plan_page: %s", e)
 
         # Initialiser la gestion de la measurement_page
         try:
             self.measurement_page_manager = MeasurementPageManager(self, self.cfg)
         except Exception as e:
-            self.set_log_text(f"Erreur measurement_page: {e}")
+            logger.exception("Erreur affichage measurement_page: %s", e)
 
         # Initialiser la gestion de la setup_page
         try:
             self.setup_page_manager = SetupPageManager(self, self.cfg)
         except Exception as e:
-            self.set_log_text(f"Erreur setup_page: {e}")
+            logger.exception("Erreur affichage setup_page: %s", e)
         
     def _update_time_label(self):
         try:
@@ -86,8 +94,8 @@ class MainWindow(QMainWindow):
             label = getattr(self.ui, "time_label", None)
             if label is not None:
                 label.setText(now.toString("dd/MM/yyyy HH:mm:ss"))
-        except Exception:
-            pass
+        except Exception as e:
+            logger.exception("Erreur affichage time_label: %s", e)
 
 
     def set_log_text(self, text: str) -> None:
@@ -95,7 +103,6 @@ class MainWindow(QMainWindow):
         try:
             if hasattr(self.ui, "log") and self.ui.log is not None:
                 self.ui.log.setText(str(text))
-        except Exception:
-            # Ne pas faire planter l'application si le widget est absent
-            pass
+        except Exception as e:
+            logger.exception("Erreur affichage log: %s", e)
 

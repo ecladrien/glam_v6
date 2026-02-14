@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainframexAqaqB.ui'
+## Form generated from reading UI file 'MainframeLiTtBB.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.1
 ##
@@ -216,29 +216,36 @@ class Ui_MainWindow(object):
         self.phases_label_widget = QWidget(self.measurement_page)
         self.phases_label_widget.setObjectName(u"phases_label_widget")
         self.phases_label_widget.setMaximumSize(QSize(16777215, 100))
+        self.phases_label_widget.setStyleSheet(u"color: red;")
         self.horizontalLayout_13 = QHBoxLayout(self.phases_label_widget)
         self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
         self.horizontalLayout_13.setContentsMargins(0, 0, 0, 0)
         self.neutral_label = QLabel(self.phases_label_widget)
         self.neutral_label.setObjectName(u"neutral_label")
+        font1 = QFont()
+        font1.setPointSize(20)
+        self.neutral_label.setFont(font1)
         self.neutral_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_13.addWidget(self.neutral_label)
 
         self.phase_1_label = QLabel(self.phases_label_widget)
         self.phase_1_label.setObjectName(u"phase_1_label")
+        self.phase_1_label.setFont(font1)
         self.phase_1_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_13.addWidget(self.phase_1_label)
 
         self.phase_2_label = QLabel(self.phases_label_widget)
         self.phase_2_label.setObjectName(u"phase_2_label")
+        self.phase_2_label.setFont(font1)
         self.phase_2_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_13.addWidget(self.phase_2_label)
 
         self.phase_3_label = QLabel(self.phases_label_widget)
         self.phase_3_label.setObjectName(u"phase_3_label")
+        self.phase_3_label.setFont(font1)
         self.phase_3_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_13.addWidget(self.phase_3_label)
@@ -260,6 +267,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
         self.neutral_value_label = QLabel(self.neutral_value_frame)
         self.neutral_value_label.setObjectName(u"neutral_value_label")
+        font2 = QFont()
+        font2.setPointSize(30)
+        self.neutral_value_label.setFont(font2)
         self.neutral_value_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_10.addWidget(self.neutral_value_label)
@@ -275,6 +285,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
         self.phase_1_value_label = QLabel(self.phase_1_value_frame)
         self.phase_1_value_label.setObjectName(u"phase_1_value_label")
+        self.phase_1_value_label.setFont(font2)
         self.phase_1_value_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_7.addWidget(self.phase_1_value_label)
@@ -290,6 +301,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.phase_2_value_label = QLabel(self.phase_2_value_frame)
         self.phase_2_value_label.setObjectName(u"phase_2_value_label")
+        self.phase_2_value_label.setFont(font2)
         self.phase_2_value_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_8.addWidget(self.phase_2_value_label)
@@ -305,6 +317,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setObjectName(u"horizontalLayout_9")
         self.phase_3_value_label = QLabel(self.phase_3_value_frame)
         self.phase_3_value_label.setObjectName(u"phase_3_value_label")
+        self.phase_3_value_label.setFont(font2)
         self.phase_3_value_label.setStyleSheet(u"border: red;")
         self.phase_3_value_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -627,7 +640,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.main_frame.setCurrentIndex(1)
+        self.main_frame.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -656,7 +669,7 @@ class Ui_MainWindow(object):
         self.measurement_start_button.setText(QCoreApplication.translate("MainWindow", u"Start", None))
         self.measurement_stop_button.setText(QCoreApplication.translate("MainWindow", u"Stop", None))
         self.measurement_reset_button.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
-        self.measurement_savegraph_button.setText(QCoreApplication.translate("MainWindow", u"Save Graph", None))
+        self.measurement_savegraph_button.setText(QCoreApplication.translate("MainWindow", u"Save CSV", None))
         self.cam_label.setText(QCoreApplication.translate("MainWindow", u"cam_page", None))
         self.qlc_label.setText(QCoreApplication.translate("MainWindow", u"qlc_page", None))
         self.width_screen_label.setText(QCoreApplication.translate("MainWindow", u"Largeure \u00e9cran :", None))

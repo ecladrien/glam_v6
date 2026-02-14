@@ -5,6 +5,9 @@ from pathlib import Path
 import sys
 import os
 from PySide6.QtGui import QPixmap
+import logging
+
+logger = logging.getLogger(__name__)
 
 class HomePageManager:
     def __init__(self, main_window, config: Config):
@@ -16,8 +19,8 @@ class HomePageManager:
         try:
             self.ui.main_frame.setCurrentWidget(self.ui.home_page)
 
-            head_path = Path(getattr(self.config, "head_img", ""))
-            default_path = Path(getattr(self.config, "default_img", ""))
+            head_path = Path(getattr(self.config.paths, "head_img", ""))
+            default_path = Path(getattr(self.config.paths, "default_img", ""))
 
             chosen = None
             if head_path.exists():
@@ -26,14 +29,18 @@ class HomePageManager:
                 chosen = default_path
 
             if chosen is None:
+                msg = "Aucune image de fond disponible (head_img ou default_img) - vérifier la config"
+                logger.warning(msg)
                 if hasattr(self.main_window, 'set_log_text'):
-                    self.main_window.set_log_text("Aucune image de fond disponible (head_img ou default_img) - vérifier la config")
+                    self.main_window.set_log_text(msg)
                 return
 
             pix = QPixmap(str(chosen))
             if pix.isNull():
+                msg = "Impossible de charger l'image de fond"
+                logger.warning("%s: %s", msg, chosen)
                 if hasattr(self.main_window, 'set_log_text'):
-                    self.main_window.set_log_text("Impossible de charger l'image de fond")
+                    self.main_window.set_log_text(msg)
                 return
 
             label = self.ui.background_image
@@ -44,6 +51,7 @@ class HomePageManager:
             scaled = pix.scaled(w, h, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             label.setPixmap(scaled)
         except Exception as e:
+            logger.exception("Erreur affichage home_page: %s", e)
             if hasattr(self.main_window, 'set_log_text'):
                 self.main_window.set_log_text(f"Erreur affichage home_page: {e}")
 
@@ -54,43 +62,28 @@ class HomePageManager:
 
     def _restart_button_clicked(self):
         # Sauvegarder la config si un gestionnaire est disponible, sinon sauvegarder la config brute
-        try:
-            if hasattr(self.main_window, 'setup_page_manager') and hasattr(self.main_window.setup_page_manager, 'save_fields_to_config'):
-                self.main_window.setup_page_manager.save_fields_to_config()
-            else:
-                # Persister la config actuelle
-                try:
-                    self.config.save()
-                except Exception:
-                    pass
-        except Exception as e:
-            if hasattr(self.main_window, 'set_log_text'):
-                self.main_window.set_log_text(f"Erreur lors de la sauvegarde avant restart: {e}")
+        self._save_config()
 
         # Redémarrer l'application
         try:
+            logger.info("Redémarrage demandé via UI")
             QApplication.quit()
             QProcess.startDetached(sys.executable, sys.argv)
         except Exception as e:
+            logger.exception("Erreur lors du redémarrage: %s", e)
             if hasattr(self.main_window, 'set_log_text'):
                 self.main_window.set_log_text(f"Erreur lors du redémarrage: {e}")
 
     def shutdown_button_clicked(self):
         # Sauvegarder la config si possible
-        try:
-            if hasattr(self.main_window, 'setup_page_manager') and hasattr(self.main_window.setup_page_manager, 'save_fields_to_config'):
-                self.main_window.setup_page_manager.save_fields_to_config()
-            else:
-                try:
-                    self.config.save()
-                except Exception:
-                    pass
-        except Exception:
-            pass
+        self._save_config()
 
         # Tenter un arrêt propre si la plateforme le permet (peut nécessiter des privilèges)
         try:
-            self.main_window.set_log_text('Tentative d\'arrêt du système...')   
+            msg = 'Tentative d\'arrêt du système...'
+            logger.info(msg)
+            if hasattr(self.main_window, 'set_log_text'):
+                self.main_window.set_log_text(msg)
             """
             if sys.platform.startswith("linux"):
                 os.system("shutdown -h now")
@@ -101,5 +94,18 @@ class HomePageManager:
                 if hasattr(self.main_window, 'set_log_text'):
                     self.main_window.set_log_text('Shutdown non supporté sur ce système.')"""
         except Exception as e:
+            logger.exception("Erreur shutdown: %s", e)
             if hasattr(self.main_window, 'set_log_text'):
                 self.main_window.set_log_text(f'Erreur shutdown: {e}')
+
+
+    def _save_config(self):
+        try:
+            if hasattr(self.main_window, 'setup_page_manager') and hasattr(self.main_window.setup_page_manager, 'save_fields_to_config'):
+                self.main_window.setup_page_manager.save_fields_to_config()
+            else:
+                self.config.save()
+        except Exception as e:
+            logger.exception("Erreur lors de la sauvegarde de la config: %s", e)
+            if hasattr(self.main_window, 'set_log_text'):
+                self.main_window.set_log_text(f"Erreur lors de la sauvegarde de la config: {e}")

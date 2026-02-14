@@ -1,4 +1,4 @@
-from glam.config.manager import Config
+from config.manager import Config
 
 
 def test_default_config_values():

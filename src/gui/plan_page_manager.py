@@ -28,16 +28,10 @@ class ClickableLabel(QLabel):
 
 class PlanPageManager:
     """Gère l'affichage des plans (images + pdf) dans la page 'plan_page'.
-
-    - Affiche des miniatures d'images dans `gridLayout_2`.
-    - Les miniatures sont cliquables et s'ouvrent en plein écran.
-    - Les fichiers PDF s'ouvrent avec l'application par défaut.
     """
 
     IMAGE_EXT = {".jpg", ".jpeg", ".png", ".bmp", ".gif"}
     PDF_EXT = {".pdf"}
-
-    
 
     def __init__(self, main_window, config: Config):
         self.main_window = main_window
@@ -75,7 +69,8 @@ class PlanPageManager:
             layout.addWidget(self.scroll)
 
     def _load_plan_files(self) -> None:
-        plan_dir = Path(getattr(self.config, 'plan_dir', 'plans'))
+        # Use the configured paths.plan_dir when available; default to ressources/plans
+        plan_dir = Path(getattr(self.config.paths, 'plan_dir', Path("./ressources/plans")))
         # If relative path, consider project root (one level up from src)
         if not plan_dir.exists():
             alt = Path.cwd().parent / plan_dir
