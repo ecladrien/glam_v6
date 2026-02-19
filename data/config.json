@@ -13,18 +13,18 @@
         "artnet_network": "2.0.0.69"
     },
     "qlc": {
-        "qlc_folder_path": "/Users/adrien/Documents/Stockage_mac/Realisations/Codage/Python/Glam/Glam_v6/ressources/qlc_files",
+        "qlc_folder_path": "/ressources/qlc_files",
         "qlc_file_path": "ressources/qlc_files/default.qxw"
     },
     "paths": {
         "data_file": "data/measurements.csv",
         "plan_dir": "ressources/plans",
         "default_img": "ressources/img/unicorn.png",
-        "head_img": "/Users/adrien/Documents/Stockage_mac/Realisations/Codage/Python/Glam/Glam_v6/ressources/img/Unicorn.png"
+        "head_img": "/ressources/img/Unicorn.png"
     },
     "camera": {
         "rtsp_stream": "/h264Preview_01_main",
-        "onvif_port": 800,
+        "onvif_port": 8000,
         "rtsp_user": "admin"
     }
 }

@@ -19,7 +19,7 @@ class DisplayConfig(BaseModel):
     fullscreen: bool = False
 
 class HardwareConfig(BaseModel):
-    arduino_port: str = "/dev/cu.usbmodem1101" #"/dev/ttyACM0"
+    arduino_port: str = "/dev/ttyACM0" #"/dev/cu.usbmodem1101"
 
 class NetworkConfig(BaseModel):
     camera_ip: str = "192.168.1.188"

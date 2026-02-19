@@ -55,7 +55,7 @@ class ArduinoController:
 
         # Paths
         self.data_file = Path(getattr(self.config, "data_file", "data/measurements.csv"))
-        self.arduino_port = getattr(self.config, "arduino_port", "/dev/cu.usbmodem1101")
+        self.arduino_port = getattr(self.config, "arduino_port", "/dev/ttyACM0")
 
         # State
         self._serial = None
