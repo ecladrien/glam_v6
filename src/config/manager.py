@@ -25,13 +25,19 @@ class PathsConfig(BaseModel):
     plan_dir: Path = Path("./ressources/plans")
     default_img: Path = Path("./ressources/img/unicorn.png")
     head_img: Path = Path("./ressources/img/unicorn.png")
+    
+class CameraConfig(BaseModel):
+    rtsp_stream: str = "/h264Preview_01_main"
+    onvif_port: int = 8000
+    rtsp_user: str = "admin"
+    rtsp_password: str = "admin123"
 
 class Config(BaseModel):
     display: DisplayConfig = Field(default_factory=DisplayConfig)
     hardware: HardwareConfig = Field(default_factory=HardwareConfig)
     network: NetworkConfig = Field(default_factory=NetworkConfig)
     paths: PathsConfig = Field(default_factory=PathsConfig)
-    
+    camera: CameraConfig = Field(default_factory=CameraConfig)
 
     @classmethod
     def load_default(cls, path: Optional[str] = None) -> "Config":

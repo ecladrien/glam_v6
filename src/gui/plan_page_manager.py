@@ -127,6 +127,17 @@ class PlanPageManager:
                 col = 0
                 row += 1
 
+    def refresh_plans(self) -> None:
+        """Reload plan files and refresh the UI (public method).
+
+        Call this after external changes to the `plan_dir` so the page updates.
+        """
+        try:
+            self._load_plan_files()
+        except Exception as e:
+            if hasattr(self.main_window, 'set_log_text'):
+                self.main_window.set_log_text(f"Erreur lors du rafraîchissement des plans: {e}")
+
     def _open_file_with_default(self, path: Path) -> None:
         try:
             QDesktopServices.openUrl(QUrl.fromLocalFile(str(path)))

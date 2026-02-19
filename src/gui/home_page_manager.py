@@ -18,14 +18,21 @@ class HomePageManager:
         # Afficher la home_page
         try:
             self.ui.main_frame.setCurrentWidget(self.ui.home_page)
+            self._load_and_apply_background()
+        except Exception as e:
+            logger.exception("Erreur affichage home_page: %s", e)
+            if hasattr(self.main_window, 'set_log_text'):
+                self.main_window.set_log_text(f"Erreur affichage home_page: {e}")
 
+    def _load_and_apply_background(self):
+        try:
             head_path = Path(getattr(self.config.paths, "head_img", ""))
             default_path = Path(getattr(self.config.paths, "default_img", ""))
 
             chosen = None
-            if head_path.exists():
+            if head_path and head_path.exists():
                 chosen = head_path
-            elif default_path.exists():
+            elif default_path and default_path.exists():
                 chosen = default_path
 
             if chosen is None:
@@ -51,9 +58,20 @@ class HomePageManager:
             scaled = pix.scaled(w, h, Qt.KeepAspectRatio, Qt.SmoothTransformation)
             label.setPixmap(scaled)
         except Exception as e:
-            logger.exception("Erreur affichage home_page: %s", e)
+            logger.exception("Erreur application background: %s", e)
             if hasattr(self.main_window, 'set_log_text'):
-                self.main_window.set_log_text(f"Erreur affichage home_page: {e}")
+                self.main_window.set_log_text(f"Erreur application background: {e}")
+
+    def set_head_image(self, path: Path):
+        """Met à jour `config.paths.head_img`, sauvegarde la config et rafraîchit l'affichage."""
+        try:
+            self.config.paths.head_img = Path(path)
+            self.config.save()
+            self._load_and_apply_background()
+        except Exception as e:
+            logger.exception("Erreur lors de la mise à jour du head_img: %s", e)
+            if hasattr(self.main_window, 'set_log_text'):
+                self.main_window.set_log_text(f"Erreur lors de la mise à jour du head_img: {e}")
 
 
     def _connect_buttons(self):

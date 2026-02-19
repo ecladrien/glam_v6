@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainframeBCDoER.ui'
+## Form generated from reading UI file 'MainframejpRBrl.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.1
 ##
@@ -19,7 +19,7 @@ from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QGridLayout,
     QHBoxLayout, QLabel, QLineEdit, QMainWindow,
     QPushButton, QSizePolicy, QStackedWidget, QVBoxLayout,
     QWidget)
-from .. import ressources_rc
+from ..gui import ressources_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -87,20 +87,22 @@ class Ui_MainWindow(object):
         self.plan_button.setObjectName(u"plan_button")
         self.plan_button.setMaximumSize(QSize(100, 100))
         self.plan_button.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
-        self.plan_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/plan_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}")
+        self.plan_button.setStyleSheet(u"")
+        icon = QIcon()
+        icon.addFile(u":/icons/ressources/icons/plan_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.plan_button.setIcon(icon)
+        self.plan_button.setIconSize(QSize(30, 30))
 
         self.gridLayout.addWidget(self.plan_button, 1, 0, 1, 1)
 
         self.qlc_button = QPushButton(self.side_frame)
         self.qlc_button.setObjectName(u"qlc_button")
         self.qlc_button.setMaximumSize(QSize(100, 100))
-        self.qlc_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/sliders_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}")
+        self.qlc_button.setStyleSheet(u"")
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/ressources/icons/sliders_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.qlc_button.setIcon(icon1)
+        self.qlc_button.setIconSize(QSize(30, 30))
 
         self.gridLayout.addWidget(self.qlc_button, 4, 0, 1, 1)
 
@@ -110,10 +112,11 @@ class Ui_MainWindow(object):
         font = QFont()
         font.setBold(True)
         self.setup_button.setFont(font)
-        self.setup_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/settings_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}")
+        self.setup_button.setStyleSheet(u"")
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/ressources/icons/settings_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.setup_button.setIcon(icon2)
+        self.setup_button.setIconSize(QSize(30, 30))
 
         self.gridLayout.addWidget(self.setup_button, 5, 0, 1, 1)
 
@@ -122,15 +125,10 @@ class Ui_MainWindow(object):
         self.home_button.setMinimumSize(QSize(0, 0))
         self.home_button.setMaximumSize(QSize(100, 100))
         self.home_button.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
-        self.home_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/home_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}\n"
-"\n"
-"QPushButton:hover {\n"
-"    qproperty-icon: url(:/icons/icons/home_white.svg);\n"
-"	qproperty-iconSize: 50px 50px;\n"
-"}")
+        self.home_button.setStyleSheet(u"")
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/ressources/icons/home_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.home_button.setIcon(icon3)
         self.home_button.setIconSize(QSize(30, 30))
 
         self.gridLayout.addWidget(self.home_button, 0, 0, 1, 1)
@@ -138,20 +136,22 @@ class Ui_MainWindow(object):
         self.cam_button = QPushButton(self.side_frame)
         self.cam_button.setObjectName(u"cam_button")
         self.cam_button.setMaximumSize(QSize(100, 100))
-        self.cam_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/video_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}")
+        self.cam_button.setStyleSheet(u"")
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/ressources/icons/video_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.cam_button.setIcon(icon4)
+        self.cam_button.setIconSize(QSize(30, 30))
 
         self.gridLayout.addWidget(self.cam_button, 3, 0, 1, 1)
 
         self.measurement_button = QPushButton(self.side_frame)
         self.measurement_button.setObjectName(u"measurement_button")
         self.measurement_button.setMaximumSize(QSize(100, 100))
-        self.measurement_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/zap_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}")
+        self.measurement_button.setStyleSheet(u"")
+        icon5 = QIcon()
+        icon5.addFile(u":/icons/ressources/icons/zap_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.measurement_button.setIcon(icon5)
+        self.measurement_button.setIconSize(QSize(30, 30))
 
         self.gridLayout.addWidget(self.measurement_button, 2, 0, 1, 1)
 
@@ -181,10 +181,11 @@ class Ui_MainWindow(object):
         self.restart_button.setObjectName(u"restart_button")
         self.restart_button.setMinimumSize(QSize(0, 100))
         self.restart_button.setMaximumSize(QSize(100, 16777215))
-        self.restart_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/refresh-cw_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}")
+        self.restart_button.setStyleSheet(u"")
+        icon6 = QIcon()
+        icon6.addFile(u":/icons/ressources/icons/refresh-cw_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.restart_button.setIcon(icon6)
+        self.restart_button.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_3.addWidget(self.restart_button)
 
@@ -192,10 +193,11 @@ class Ui_MainWindow(object):
         self.shutdown_button.setObjectName(u"shutdown_button")
         self.shutdown_button.setMinimumSize(QSize(0, 100))
         self.shutdown_button.setMaximumSize(QSize(100, 16777215))
-        self.shutdown_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/power_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}")
+        self.shutdown_button.setStyleSheet(u"")
+        icon7 = QIcon()
+        icon7.addFile(u":/icons/ressources/icons/power_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.shutdown_button.setIcon(icon7)
+        self.shutdown_button.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_3.addWidget(self.shutdown_button)
 
@@ -367,44 +369,42 @@ class Ui_MainWindow(object):
         self.measurement_start_button = QPushButton(self.measurement_button_widget)
         self.measurement_start_button.setObjectName(u"measurement_start_button")
         self.measurement_start_button.setMaximumSize(QSize(200, 150))
-        self.measurement_start_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/play_red.svg);\n"
-"    qproperty-iconSize: 50px 50px;\n"
-"}\n"
-"")
+        self.measurement_start_button.setStyleSheet(u"")
+        icon8 = QIcon()
+        icon8.addFile(u":/icons/ressources/icons/play_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.measurement_start_button.setIcon(icon8)
+        self.measurement_start_button.setIconSize(QSize(50, 50))
 
         self.horizontalLayout_12.addWidget(self.measurement_start_button)
 
         self.measurement_stop_button = QPushButton(self.measurement_button_widget)
         self.measurement_stop_button.setObjectName(u"measurement_stop_button")
         self.measurement_stop_button.setMaximumSize(QSize(200, 150))
-        self.measurement_stop_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/stop_red.svg);\n"
-"    qproperty-iconSize: 50px 50px;\n"
-"}\n"
-"")
+        self.measurement_stop_button.setStyleSheet(u"")
+        icon9 = QIcon()
+        icon9.addFile(u":/icons/ressources/icons/stop_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.measurement_stop_button.setIcon(icon9)
+        self.measurement_stop_button.setIconSize(QSize(50, 50))
 
         self.horizontalLayout_12.addWidget(self.measurement_stop_button)
 
         self.measurement_reset_button = QPushButton(self.measurement_button_widget)
         self.measurement_reset_button.setObjectName(u"measurement_reset_button")
         self.measurement_reset_button.setMaximumSize(QSize(200, 150))
-        self.measurement_reset_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/refresh-cw_red.svg);\n"
-"    qproperty-iconSize: 50px 50px;\n"
-"}\n"
-"")
+        self.measurement_reset_button.setStyleSheet(u"")
+        self.measurement_reset_button.setIcon(icon6)
+        self.measurement_reset_button.setIconSize(QSize(50, 50))
 
         self.horizontalLayout_12.addWidget(self.measurement_reset_button)
 
         self.measurement_savegraph_button = QPushButton(self.measurement_button_widget)
         self.measurement_savegraph_button.setObjectName(u"measurement_savegraph_button")
         self.measurement_savegraph_button.setMaximumSize(QSize(200, 150))
-        self.measurement_savegraph_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/archive_red.svg);\n"
-"    qproperty-iconSize: 50px 50px;\n"
-"}\n"
-"")
+        self.measurement_savegraph_button.setStyleSheet(u"")
+        icon10 = QIcon()
+        icon10.addFile(u":/icons/ressources/icons/archive_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.measurement_savegraph_button.setIcon(icon10)
+        self.measurement_savegraph_button.setIconSize(QSize(50, 50))
 
         self.horizontalLayout_12.addWidget(self.measurement_savegraph_button)
 
@@ -414,12 +414,40 @@ class Ui_MainWindow(object):
         self.main_frame.addWidget(self.measurement_page)
         self.cam_page = QWidget()
         self.cam_page.setObjectName(u"cam_page")
-        self.horizontalLayout_15 = QHBoxLayout(self.cam_page)
+        self.verticalLayout_5 = QVBoxLayout(self.cam_page)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.grid_layout_widget = QWidget(self.cam_page)
+        self.grid_layout_widget.setObjectName(u"grid_layout_widget")
+        self.horizontalLayout_15 = QHBoxLayout(self.grid_layout_widget)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
-        self.cam_label = QLabel(self.cam_page)
-        self.cam_label.setObjectName(u"cam_label")
+        self.horizontalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.search_grid_layout = QGridLayout()
+        self.search_grid_layout.setObjectName(u"search_grid_layout")
 
-        self.horizontalLayout_15.addWidget(self.cam_label)
+        self.horizontalLayout_15.addLayout(self.search_grid_layout)
+
+
+        self.verticalLayout_5.addWidget(self.grid_layout_widget)
+
+        self.button_search_cam_widget = QWidget(self.cam_page)
+        self.button_search_cam_widget.setObjectName(u"button_search_cam_widget")
+        self.button_search_cam_widget.setMaximumSize(QSize(16777215, 150))
+        self.horizontalLayout_5 = QHBoxLayout(self.button_search_cam_widget)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.search_button = QPushButton(self.button_search_cam_widget)
+        self.search_button.setObjectName(u"search_button")
+        self.search_button.setMaximumSize(QSize(100, 100))
+        icon11 = QIcon()
+        icon11.addFile(u":/icons/ressources/icons/search_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.search_button.setIcon(icon11)
+        self.search_button.setIconSize(QSize(30, 30))
+
+        self.horizontalLayout_5.addWidget(self.search_button)
+
+
+        self.verticalLayout_5.addWidget(self.button_search_cam_widget)
 
         self.main_frame.addWidget(self.cam_page)
         self.qlc_page = QWidget()
@@ -494,25 +522,15 @@ class Ui_MainWindow(object):
 
         self.adress_ip_layout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.adress_ip_line_edit)
 
-        self.adress_ip_cam_label = QLabel(self.setup_page)
-        self.adress_ip_cam_label.setObjectName(u"adress_ip_cam_label")
-
-        self.adress_ip_layout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.adress_ip_cam_label)
-
-        self.adress_ip_cam_line_edit = QLineEdit(self.setup_page)
-        self.adress_ip_cam_line_edit.setObjectName(u"adress_ip_cam_line_edit")
-
-        self.adress_ip_layout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.adress_ip_cam_line_edit)
-
         self.adress_ip_artnet = QLabel(self.setup_page)
         self.adress_ip_artnet.setObjectName(u"adress_ip_artnet")
 
-        self.adress_ip_layout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.adress_ip_artnet)
+        self.adress_ip_layout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.adress_ip_artnet)
 
         self.adress_ip_artnet_line_edit = QLineEdit(self.setup_page)
         self.adress_ip_artnet_line_edit.setObjectName(u"adress_ip_artnet_line_edit")
 
-        self.adress_ip_layout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.adress_ip_artnet_line_edit)
+        self.adress_ip_layout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.adress_ip_artnet_line_edit)
 
 
         self.verticalLayout.addLayout(self.adress_ip_layout)
@@ -523,6 +541,58 @@ class Ui_MainWindow(object):
         self.setup_line_2.setFrameShadow(QFrame.Shadow.Sunken)
 
         self.verticalLayout.addWidget(self.setup_line_2)
+
+        self.setings_cam_layout = QFormLayout()
+        self.setings_cam_layout.setObjectName(u"setings_cam_layout")
+        self.adress_ip_cam_line_edit = QLineEdit(self.setup_page)
+        self.adress_ip_cam_line_edit.setObjectName(u"adress_ip_cam_line_edit")
+
+        self.setings_cam_layout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.adress_ip_cam_line_edit)
+
+        self.adress_ip_cam_label = QLabel(self.setup_page)
+        self.adress_ip_cam_label.setObjectName(u"adress_ip_cam_label")
+
+        self.setings_cam_layout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.adress_ip_cam_label)
+
+        self.port_cam_label = QLabel(self.setup_page)
+        self.port_cam_label.setObjectName(u"port_cam_label")
+
+        self.setings_cam_layout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.port_cam_label)
+
+        self.user_cam_label = QLabel(self.setup_page)
+        self.user_cam_label.setObjectName(u"user_cam_label")
+
+        self.setings_cam_layout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.user_cam_label)
+
+        self.port_cam_line_edit = QLineEdit(self.setup_page)
+        self.port_cam_line_edit.setObjectName(u"port_cam_line_edit")
+
+        self.setings_cam_layout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.port_cam_line_edit)
+
+        self.user_cam_line_edit = QLineEdit(self.setup_page)
+        self.user_cam_line_edit.setObjectName(u"user_cam_line_edit")
+
+        self.setings_cam_layout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.user_cam_line_edit)
+
+        self.password_cam_label = QLabel(self.setup_page)
+        self.password_cam_label.setObjectName(u"password_cam_label")
+
+        self.setings_cam_layout.setWidget(3, QFormLayout.ItemRole.LabelRole, self.password_cam_label)
+
+        self.password_cam_line_edit = QLineEdit(self.setup_page)
+        self.password_cam_line_edit.setObjectName(u"password_cam_line_edit")
+
+        self.setings_cam_layout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.password_cam_line_edit)
+
+
+        self.verticalLayout.addLayout(self.setings_cam_layout)
+
+        self.setup_line_4 = QFrame(self.setup_page)
+        self.setup_line_4.setObjectName(u"setup_line_4")
+        self.setup_line_4.setFrameShape(QFrame.Shape.HLine)
+        self.setup_line_4.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout.addWidget(self.setup_line_4)
 
         self.plan_layout = QGridLayout()
         self.plan_layout.setObjectName(u"plan_layout")
@@ -538,11 +608,11 @@ class Ui_MainWindow(object):
         self.plan_charge_button.setObjectName(u"plan_charge_button")
         self.plan_charge_button.setMinimumSize(QSize(100, 100))
         self.plan_charge_button.setMaximumSize(QSize(100, 16777215))
-        self.plan_charge_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/folder-plus_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}\n"
-"")
+        self.plan_charge_button.setStyleSheet(u"")
+        icon12 = QIcon()
+        icon12.addFile(u":/icons/ressources/icons/folder-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.plan_charge_button.setIcon(icon12)
+        self.plan_charge_button.setIconSize(QSize(30, 30))
 
         self.plan_layout.addWidget(self.plan_charge_button, 0, 1, 1, 1)
 
@@ -550,11 +620,11 @@ class Ui_MainWindow(object):
         self.plan_delete_button.setObjectName(u"plan_delete_button")
         self.plan_delete_button.setMinimumSize(QSize(100, 100))
         self.plan_delete_button.setMaximumSize(QSize(100, 16777215))
-        self.plan_delete_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/folder-minus_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}\n"
-"")
+        self.plan_delete_button.setStyleSheet(u"")
+        icon13 = QIcon()
+        icon13.addFile(u":/icons/ressources/icons/folder-minus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.plan_delete_button.setIcon(icon13)
+        self.plan_delete_button.setIconSize(QSize(30, 30))
 
         self.plan_layout.addWidget(self.plan_delete_button, 0, 2, 1, 1)
 
@@ -569,11 +639,11 @@ class Ui_MainWindow(object):
         self.background_img_choose_button.setObjectName(u"background_img_choose_button")
         self.background_img_choose_button.setMinimumSize(QSize(100, 100))
         self.background_img_choose_button.setMaximumSize(QSize(100, 16777215))
-        self.background_img_choose_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/file-plus_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}\n"
-"")
+        self.background_img_choose_button.setStyleSheet(u"")
+        icon14 = QIcon()
+        icon14.addFile(u":/icons/ressources/icons/file-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.background_img_choose_button.setIcon(icon14)
+        self.background_img_choose_button.setIconSize(QSize(30, 30))
 
         self.plan_layout.addWidget(self.background_img_choose_button, 1, 1, 1, 1)
 
@@ -595,11 +665,9 @@ class Ui_MainWindow(object):
         self.reset_setup_button.setObjectName(u"reset_setup_button")
         self.reset_setup_button.setMinimumSize(QSize(0, 100))
         self.reset_setup_button.setMaximumSize(QSize(100, 16777215))
-        self.reset_setup_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/refresh-cw_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}\n"
-"")
+        self.reset_setup_button.setStyleSheet(u"")
+        self.reset_setup_button.setIcon(icon6)
+        self.reset_setup_button.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_6.addWidget(self.reset_setup_button)
 
@@ -607,11 +675,9 @@ class Ui_MainWindow(object):
         self.save_setup_button.setObjectName(u"save_setup_button")
         self.save_setup_button.setMinimumSize(QSize(0, 100))
         self.save_setup_button.setMaximumSize(QSize(100, 16777215))
-        self.save_setup_button.setStyleSheet(u"QPushButton {\n"
-"    qproperty-icon: url(:/icons/icons/archive_red.svg);\n"
-"    qproperty-iconSize: 30px 30px;\n"
-"}\n"
-"")
+        self.save_setup_button.setStyleSheet(u"")
+        self.save_setup_button.setIcon(icon10)
+        self.save_setup_button.setIconSize(QSize(30, 30))
 
         self.horizontalLayout_6.addWidget(self.save_setup_button)
 
@@ -679,13 +745,16 @@ class Ui_MainWindow(object):
         self.measurement_stop_button.setText(QCoreApplication.translate("MainWindow", u"Stop", None))
         self.measurement_reset_button.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
         self.measurement_savegraph_button.setText(QCoreApplication.translate("MainWindow", u"Save CSV", None))
-        self.cam_label.setText(QCoreApplication.translate("MainWindow", u"cam_page", None))
+        self.search_button.setText(QCoreApplication.translate("MainWindow", u"Search", None))
         self.qlc_label.setText(QCoreApplication.translate("MainWindow", u"qlc_page", None))
         self.width_screen_label.setText(QCoreApplication.translate("MainWindow", u"Largeure \u00e9cran :", None))
         self.height_screen_label.setText(QCoreApplication.translate("MainWindow", u"Hauteur \u00e9cran :", None))
         self.adress_ip_label.setText(QCoreApplication.translate("MainWindow", u"Adresse ip :", None))
-        self.adress_ip_cam_label.setText(QCoreApplication.translate("MainWindow", u"Adresse ip Cam :", None))
         self.adress_ip_artnet.setText(QCoreApplication.translate("MainWindow", u"Adresse Artnet :", None))
+        self.adress_ip_cam_label.setText(QCoreApplication.translate("MainWindow", u"Adresse ip Cam :", None))
+        self.port_cam_label.setText(QCoreApplication.translate("MainWindow", u"Port Cam :", None))
+        self.user_cam_label.setText(QCoreApplication.translate("MainWindow", u"User :", None))
+        self.password_cam_label.setText(QCoreApplication.translate("MainWindow", u"Password :", None))
         self.plan_label.setText(QCoreApplication.translate("MainWindow", u"Plans :", None))
         self.plan_charge_button.setText(QCoreApplication.translate("MainWindow", u"Charger", None))
         self.plan_delete_button.setText(QCoreApplication.translate("MainWindow", u"Supprimer", None))
