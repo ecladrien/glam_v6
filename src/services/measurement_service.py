@@ -24,12 +24,6 @@ class MeasurementService:
         except Exception:
             data_file = Path(getattr(self.config, 'data_file', Path('data/measurements.csv')))
 
-        # If path is relative to project root one level up, adjust like other services
-        if not data_file.exists():
-            alt = Path.cwd().parent / data_file
-            if alt.exists():
-                data_file = alt
-
         data_file.parent.mkdir(parents=True, exist_ok=True)
         return data_file
 

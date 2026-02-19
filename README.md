@@ -89,3 +89,48 @@ pip install pytest pydantic
  ---
 
  Fichier principal : [src/app.py](src/app.py) — fenêtre : [src/gui/main_window.py](src/gui/main_window.py)
+
+## Déploiement Raspberry Pi
+
+Le dépôt inclut un kit de déploiement dans `deploy/raspberry/` :
+- `install.sh` : installe dépendances système + Python (avec fallback OpenCV ARM).
+- `run_glam.sh` : lance l'application via l'environnement virtuel local.
+- `glam.service` : template `systemd` pour démarrage automatique.
+
+### 1) Installation sur le Pi
+
+Depuis la racine du projet :
+
+```bash
+chmod +x deploy/raspberry/install.sh deploy/raspberry/run_glam.sh
+./deploy/raspberry/install.sh
+```
+
+Puis reconnectez la session utilisateur (groupe `dialout` pour l'Arduino).
+
+### 2) Test de lancement manuel
+
+```bash
+./deploy/raspberry/run_glam.sh
+```
+
+### 3) Démarrage auto avec systemd (optionnel)
+
+Copier le template et remplacer les placeholders :
+
+```bash
+cp deploy/raspberry/glam.service /tmp/glam.service
+sed -i "s|__USER__|$USER|g" /tmp/glam.service
+sed -i "s|__PROJECT_DIR__|$(pwd)|g" /tmp/glam.service
+sudo cp /tmp/glam.service /etc/systemd/system/glam.service
+sudo systemctl daemon-reload
+sudo systemctl enable glam.service
+sudo systemctl start glam.service
+```
+
+Vérification :
+
+```bash
+systemctl status glam.service
+journalctl -u glam.service -f
+```

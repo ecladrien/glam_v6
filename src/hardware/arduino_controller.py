@@ -54,8 +54,14 @@ class ArduinoController:
         self.interval = float(interval) if interval is not None else self.DEFAULT_INTERVAL
 
         # Paths
-        self.data_file = Path(getattr(self.config, "data_file", "data/measurements.csv"))
-        self.arduino_port = getattr(self.config, "arduino_port", "/dev/ttyACM0")
+        paths_cfg = getattr(self.config, "paths", None)
+        hardware_cfg = getattr(self.config, "hardware", None)
+        self.data_file = Path(
+            getattr(paths_cfg, "data_file", getattr(self.config, "data_file", "data/measurements.csv"))
+        )
+        self.arduino_port = str(
+            getattr(hardware_cfg, "arduino_port", getattr(self.config, "arduino_port", "/dev/ttyACM0"))
+        )
 
         # State
         self._serial = None

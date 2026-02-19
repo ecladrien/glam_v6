@@ -78,6 +78,47 @@ class Config(BaseModel):
 
         return values
 
+    @staticmethod
+    def _normalize_project_path(path_value: Path | str) -> Path:
+        p = Path(path_value)
+
+        # Keep valid absolute external paths as-is.
+        if p.is_absolute() and p.exists():
+            return p
+
+        # Fix malformed absolute values like "/ressources/..." or "/data/..."
+        if p.is_absolute():
+            try:
+                rel = p.relative_to(Path("/"))
+            except Exception:
+                return p
+
+            if rel.parts and rel.parts[0] in {"ressources", "data", "logs"}:
+                return PROJECT_ROOT / rel
+
+            return p
+
+        # Relative paths are resolved against project root for deterministic behavior.
+        return PROJECT_ROOT / p
+
+    @staticmethod
+    def _to_project_relative(path_value: Path | str) -> str:
+        p = Path(path_value)
+        try:
+            return str(p.relative_to(PROJECT_ROOT))
+        except Exception:
+            return str(p)
+
+    @model_validator(mode="after")
+    def _normalize_paths(self) -> "Config":
+        self.paths.data_file = self._normalize_project_path(self.paths.data_file)
+        self.paths.plan_dir = self._normalize_project_path(self.paths.plan_dir)
+        self.paths.default_img = self._normalize_project_path(self.paths.default_img)
+        self.paths.head_img = self._normalize_project_path(self.paths.head_img)
+        self.qlc.qlc_folder_path = self._normalize_project_path(self.qlc.qlc_folder_path)
+        self.qlc.qlc_file_path = self._normalize_project_path(self.qlc.qlc_file_path)
+        return self
+
     # Convenience properties for backward-compatibility with older callers/tests
     @property
     def screen_width(self) -> int:
@@ -127,4 +168,15 @@ class Config(BaseModel):
         else:
             path_obj = Path(path)
         # Do not write secrets to disk; exclude password field when saving
-        path_obj.write_text(self.model_dump_json(indent=4, exclude={"camera": {"rtsp_password"}}))
+        payload = self.model_dump(mode="json", exclude={"camera": {"rtsp_password"}})
+
+        for section, keys in {
+            "paths": ("data_file", "plan_dir", "default_img", "head_img"),
+            "qlc": ("qlc_folder_path", "qlc_file_path"),
+        }.items():
+            block = payload.get(section, {})
+            for key in keys:
+                if key in block:
+                    block[key] = self._to_project_relative(block[key])
+
+        path_obj.write_text(json.dumps(payload, indent=4))

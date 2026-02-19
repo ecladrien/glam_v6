@@ -29,10 +29,6 @@ class QlcService:
 
         if fp:
             p = Path(fp)
-            if not p.exists():
-                alt = Path.cwd().parent / p
-                if alt.exists():
-                    p = alt
 
             if not p.exists():
                 try:
@@ -49,10 +45,6 @@ class QlcService:
 
     def choose_start_dir(self) -> Path:
         start_dir = Path(getattr(self.config.qlc, 'qlc_folder_path', Path('./')))
-        if not start_dir.exists():
-            alt = Path.cwd().parent / start_dir
-            if alt.exists():
-                start_dir = alt
         return start_dir
 
     def set_chosen_file(self, path: Path) -> None:

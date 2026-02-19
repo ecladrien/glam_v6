@@ -21,10 +21,6 @@ class PlanService:
 
     def get_plan_dir(self) -> Path:
         plan_dir = Path(getattr(self.config.paths, 'plan_dir', Path("./ressources/plans")))
-        if not plan_dir.exists():
-            alt = Path.cwd().parent / plan_dir
-            if alt.exists():
-                plan_dir = alt
 
         plan_dir.mkdir(parents=True, exist_ok=True)
         return plan_dir
