@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainframejpRBrl.ui'
+## Form generated from reading UI file 'MainframejFyvFY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.1
 ##
@@ -422,11 +422,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_15 = QHBoxLayout(self.grid_layout_widget)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
         self.horizontalLayout_15.setContentsMargins(0, 0, 0, 0)
-        self.search_grid_layout = QGridLayout()
-        self.search_grid_layout.setObjectName(u"search_grid_layout")
-
-        self.horizontalLayout_15.addLayout(self.search_grid_layout)
-
 
         self.verticalLayout_5.addWidget(self.grid_layout_widget)
 
@@ -452,12 +447,56 @@ class Ui_MainWindow(object):
         self.main_frame.addWidget(self.cam_page)
         self.qlc_page = QWidget()
         self.qlc_page.setObjectName(u"qlc_page")
-        self.horizontalLayout_16 = QHBoxLayout(self.qlc_page)
-        self.horizontalLayout_16.setObjectName(u"horizontalLayout_16")
-        self.qlc_label = QLabel(self.qlc_page)
-        self.qlc_label.setObjectName(u"qlc_label")
+        self.verticalLayout_6 = QVBoxLayout(self.qlc_page)
+        self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.qlc_form_layout = QFormLayout()
+        self.qlc_form_layout.setObjectName(u"qlc_form_layout")
+        self.qlc_form_layout.setLabelAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self.qlc_form_layout.setFormAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self.path_qlc_file_label = QLabel(self.qlc_page)
+        self.path_qlc_file_label.setObjectName(u"path_qlc_file_label")
 
-        self.horizontalLayout_16.addWidget(self.qlc_label)
+        self.qlc_form_layout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.path_qlc_file_label)
+
+        self.path_choose_qlc_file_label = QLabel(self.qlc_page)
+        self.path_choose_qlc_file_label.setObjectName(u"path_choose_qlc_file_label")
+
+        self.qlc_form_layout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.path_choose_qlc_file_label)
+
+        self.choose_qlc_file_label = QLabel(self.qlc_page)
+        self.choose_qlc_file_label.setObjectName(u"choose_qlc_file_label")
+
+        self.qlc_form_layout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.choose_qlc_file_label)
+
+        self.choose_qlc_file_button = QPushButton(self.qlc_page)
+        self.choose_qlc_file_button.setObjectName(u"choose_qlc_file_button")
+        self.choose_qlc_file_button.setMinimumSize(QSize(100, 100))
+        self.choose_qlc_file_button.setMaximumSize(QSize(100, 16777215))
+        icon12 = QIcon()
+        icon12.addFile(u":/icons/ressources/icons/file-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.choose_qlc_file_button.setIcon(icon12)
+        self.choose_qlc_file_button.setIconSize(QSize(40, 40))
+
+        self.qlc_form_layout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.choose_qlc_file_button)
+
+
+        self.verticalLayout_6.addLayout(self.qlc_form_layout)
+
+        self.run_qlc_button_widget = QWidget(self.qlc_page)
+        self.run_qlc_button_widget.setObjectName(u"run_qlc_button_widget")
+        self.horizontalLayout_17 = QHBoxLayout(self.run_qlc_button_widget)
+        self.horizontalLayout_17.setObjectName(u"horizontalLayout_17")
+        self.run_qlc_button = QPushButton(self.run_qlc_button_widget)
+        self.run_qlc_button.setObjectName(u"run_qlc_button")
+        self.run_qlc_button.setMinimumSize(QSize(200, 200))
+        self.run_qlc_button.setMaximumSize(QSize(200, 16777215))
+        self.run_qlc_button.setIcon(icon8)
+        self.run_qlc_button.setIconSize(QSize(100, 100))
+
+        self.horizontalLayout_17.addWidget(self.run_qlc_button)
+
+
+        self.verticalLayout_6.addWidget(self.run_qlc_button_widget)
 
         self.main_frame.addWidget(self.qlc_page)
         self.setup_page = QWidget()
@@ -475,11 +514,12 @@ class Ui_MainWindow(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.screen_size_layout = QFormLayout()
         self.screen_size_layout.setObjectName(u"screen_size_layout")
-        self.screen_size_layout.setLabelAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self.screen_size_layout.setLabelAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
         self.screen_size_layout.setFormAlignment(Qt.AlignmentFlag.AlignCenter)
         self.width_screen_label = QLabel(self.setup_page)
         self.width_screen_label.setObjectName(u"width_screen_label")
         self.width_screen_label.setEnabled(True)
+        self.width_screen_label.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
         self.screen_size_layout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.width_screen_label)
 
@@ -488,15 +528,16 @@ class Ui_MainWindow(object):
 
         self.screen_size_layout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.width_screen_line_edit)
 
+        self.height_screen_label = QLabel(self.setup_page)
+        self.height_screen_label.setObjectName(u"height_screen_label")
+        self.height_screen_label.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
+
+        self.screen_size_layout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.height_screen_label)
+
         self.height_screen_line_edit = QLineEdit(self.setup_page)
         self.height_screen_line_edit.setObjectName(u"height_screen_line_edit")
 
         self.screen_size_layout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.height_screen_line_edit)
-
-        self.height_screen_label = QLabel(self.setup_page)
-        self.height_screen_label.setObjectName(u"height_screen_label")
-
-        self.screen_size_layout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.height_screen_label)
 
 
         self.verticalLayout.addLayout(self.screen_size_layout)
@@ -510,10 +551,11 @@ class Ui_MainWindow(object):
 
         self.adress_ip_layout = QFormLayout()
         self.adress_ip_layout.setObjectName(u"adress_ip_layout")
-        self.adress_ip_layout.setLabelAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignVCenter)
+        self.adress_ip_layout.setLabelAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
         self.adress_ip_layout.setFormAlignment(Qt.AlignmentFlag.AlignCenter)
         self.adress_ip_label = QLabel(self.setup_page)
         self.adress_ip_label.setObjectName(u"adress_ip_label")
+        self.adress_ip_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.adress_ip_layout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.adress_ip_label)
 
@@ -524,6 +566,8 @@ class Ui_MainWindow(object):
 
         self.adress_ip_artnet = QLabel(self.setup_page)
         self.adress_ip_artnet.setObjectName(u"adress_ip_artnet")
+        self.adress_ip_artnet.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.adress_ip_artnet.setAlignment(Qt.AlignmentFlag.AlignRight|Qt.AlignmentFlag.AlignTrailing|Qt.AlignmentFlag.AlignVCenter)
 
         self.adress_ip_layout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.adress_ip_artnet)
 
@@ -544,6 +588,7 @@ class Ui_MainWindow(object):
 
         self.setings_cam_layout = QFormLayout()
         self.setings_cam_layout.setObjectName(u"setings_cam_layout")
+        self.setings_cam_layout.setFormAlignment(Qt.AlignmentFlag.AlignCenter)
         self.adress_ip_cam_line_edit = QLineEdit(self.setup_page)
         self.adress_ip_cam_line_edit.setObjectName(u"adress_ip_cam_line_edit")
 
@@ -609,9 +654,9 @@ class Ui_MainWindow(object):
         self.plan_charge_button.setMinimumSize(QSize(100, 100))
         self.plan_charge_button.setMaximumSize(QSize(100, 16777215))
         self.plan_charge_button.setStyleSheet(u"")
-        icon12 = QIcon()
-        icon12.addFile(u":/icons/ressources/icons/folder-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.plan_charge_button.setIcon(icon12)
+        icon13 = QIcon()
+        icon13.addFile(u":/icons/ressources/icons/folder-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.plan_charge_button.setIcon(icon13)
         self.plan_charge_button.setIconSize(QSize(30, 30))
 
         self.plan_layout.addWidget(self.plan_charge_button, 0, 1, 1, 1)
@@ -621,9 +666,9 @@ class Ui_MainWindow(object):
         self.plan_delete_button.setMinimumSize(QSize(100, 100))
         self.plan_delete_button.setMaximumSize(QSize(100, 16777215))
         self.plan_delete_button.setStyleSheet(u"")
-        icon13 = QIcon()
-        icon13.addFile(u":/icons/ressources/icons/folder-minus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.plan_delete_button.setIcon(icon13)
+        icon14 = QIcon()
+        icon14.addFile(u":/icons/ressources/icons/folder-minus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.plan_delete_button.setIcon(icon14)
         self.plan_delete_button.setIconSize(QSize(30, 30))
 
         self.plan_layout.addWidget(self.plan_delete_button, 0, 2, 1, 1)
@@ -640,9 +685,7 @@ class Ui_MainWindow(object):
         self.background_img_choose_button.setMinimumSize(QSize(100, 100))
         self.background_img_choose_button.setMaximumSize(QSize(100, 16777215))
         self.background_img_choose_button.setStyleSheet(u"")
-        icon14 = QIcon()
-        icon14.addFile(u":/icons/ressources/icons/file-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.background_img_choose_button.setIcon(icon14)
+        self.background_img_choose_button.setIcon(icon12)
         self.background_img_choose_button.setIconSize(QSize(30, 30))
 
         self.plan_layout.addWidget(self.background_img_choose_button, 1, 1, 1, 1)
@@ -715,7 +758,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.main_frame.setCurrentIndex(5)
+        self.main_frame.setCurrentIndex(4)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -746,7 +789,11 @@ class Ui_MainWindow(object):
         self.measurement_reset_button.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
         self.measurement_savegraph_button.setText(QCoreApplication.translate("MainWindow", u"Save CSV", None))
         self.search_button.setText(QCoreApplication.translate("MainWindow", u"Search", None))
-        self.qlc_label.setText(QCoreApplication.translate("MainWindow", u"qlc_page", None))
+        self.path_qlc_file_label.setText(QCoreApplication.translate("MainWindow", u"Chemin fichier :", None))
+        self.path_choose_qlc_file_label.setText("")
+        self.choose_qlc_file_label.setText(QCoreApplication.translate("MainWindow", u"Choisir fichier :", None))
+        self.choose_qlc_file_button.setText("")
+        self.run_qlc_button.setText("")
         self.width_screen_label.setText(QCoreApplication.translate("MainWindow", u"Largeure \u00e9cran :", None))
         self.height_screen_label.setText(QCoreApplication.translate("MainWindow", u"Hauteur \u00e9cran :", None))
         self.adress_ip_label.setText(QCoreApplication.translate("MainWindow", u"Adresse ip :", None))

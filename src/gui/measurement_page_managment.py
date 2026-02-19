@@ -153,23 +153,22 @@ class MeasurementPageManager:
                 if hasattr(self.main_window, 'set_log_text'):
                     self.main_window.set_log_text(msg)
                 return
-
-            # Ask user for destination directory
-            folder = QFileDialog.getExistingDirectory(self.main_window, "Choisir dossier de sauvegarde")
-            if not folder:
+            # Ask user for destination file (Save As)
+            suggested_name = data_file.name
+            fname, _ = QFileDialog.getSaveFileName(self.main_window, "Enregistrer sous", suggested_name, "CSV Files (*.csv);;All Files (*.*)")
+            if not fname:
                 return
 
-            dest_dir = Path(folder)
-            dest_dir.mkdir(parents=True, exist_ok=True)
-            dest_file = dest_dir / f"measurements_copy_{data_file.stem}{data_file.suffix}"
-            # If exists, append index
-            i = 1
-            while dest_file.exists():
-                dest_file = dest_dir / f"measurements_copy_{data_file.stem}_{i}{data_file.suffix}"
-                i += 1
+            dest_file = Path(fname)
+            # Confirm overwrite if file exists
+            if dest_file.exists():
+                reply = QMessageBox.question(self.main_window, 'Confirmer écrasement', f"{dest_file} existe déjà. Écraser ?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+                if reply != QMessageBox.StandardButton.Yes:
+                    return
 
+            dest_file.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(str(data_file), str(dest_file))
-            msg = f"Fichier copié vers: {dest_file}"
+            msg = f"Fichier enregistré sous: {dest_file}"
             logger.info(msg)
             if hasattr(self.main_window, 'set_log_text'):
                 self.main_window.set_log_text(msg)

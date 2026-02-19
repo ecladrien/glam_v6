@@ -3,9 +3,10 @@ from pathlib import Path
 from PySide6.QtCore import Qt, QTimer, QDateTime
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QMainWindow
-from .setup_page_manager import SetupPageManager
 from .home_page_manager import HomePageManager
 from .plan_page_manager import PlanPageManager
+from .qlc_page_manager import QlcPageManager
+from .setup_page_manager import SetupPageManager
 from .measurement_page_managment import MeasurementPageManager
 from .Ui_MainWindow import Ui_MainWindow
 import logging
@@ -81,6 +82,12 @@ class MainWindow(QMainWindow):
             self.measurement_page_manager = MeasurementPageManager(self, self.cfg)
         except Exception as e:
             logger.exception("Erreur affichage measurement_page: %s", e)
+
+        # Initialiser la gestion de la qlc_page
+        try:
+            self.qlc_page_manager = QlcPageManager(self, self.cfg)
+        except Exception as e:
+            logger.exception("Erreur affichage qlc_page: %s", e)
 
         # Initialiser la gestion de la setup_page
         try:

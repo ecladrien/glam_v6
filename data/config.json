@@ -12,6 +12,10 @@
         "device_ip": "192.168.1.69",
         "artnet_network": "2.0.0.69"
     },
+    "qlc": {
+        "qlc_folder_path": "/Users/adrien/Documents/Stockage_mac/Realisations/Codage/Python/Glam/Glam_v6/ressources/qlc_files",
+        "qlc_file_path": "/Users/adrien/Documents/Stockage_mac/Realisations/Codage/Python/Glam/Glam_v6/ressources/qlc_files/default.qxw"
+    },
     "paths": {
         "data_file": "data/measurements.csv",
         "plan_dir": "ressources/plans",
@@ -21,7 +25,6 @@
     "camera": {
         "rtsp_stream": "/h264Preview_01_main",
         "onvif_port": 8000,
-        "rtsp_user": "admin",
-        "rtsp_password": "admin123"
+        "rtsp_user": "admin"
     }
 }

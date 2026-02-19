@@ -29,7 +29,9 @@ class ReolinkCamera:
         if rtsp_user is None:
             rtsp_user = cfg.camera.rtsp_user
         if rtsp_password is None:
-            rtsp_password = cfg.camera.rtsp_password
+            pw = cfg.camera.rtsp_password
+            # `rtsp_password` may be a SecretStr; extract plain value when needed
+            rtsp_password = pw.get_secret_value() if hasattr(pw, "get_secret_value") else pw
         if rtsp_stream is None:
             rtsp_stream = cfg.camera.rtsp_stream
         if onvif_port is None:

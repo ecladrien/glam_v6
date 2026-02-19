@@ -37,6 +37,15 @@ class SetupPageManager:
             self.config.camera.onvif_port = int(self.ui.port_cam_line_edit.text())
             self.config.camera.rtsp_user = self.ui.user_cam_line_edit.text()
             self.config.camera.rtsp_password = self.ui.password_cam_line_edit.text()
+            reply = QMessageBox.question(
+                self.main_window,
+                "Confirmer sauvegarde",
+                "Sauvegarder les modifications apportées à la configuration ?",
+                QMessageBox.Yes | QMessageBox.No,
+            )
+            if reply != QMessageBox.Yes:
+                return
+            
             self.config.save()
             if hasattr(self.main_window, 'set_log_text'):
                 self.main_window.set_log_text('Configuration sauvegardée.')
@@ -46,6 +55,20 @@ class SetupPageManager:
             logger.exception("Erreur lors de la sauvegarde de la configuration: %s", e)
 
     def reset_to_default(self):
+        # Demander confirmation avant de réinitialiser les champs (non sauvegardés)
+        try:
+            reply = QMessageBox.question(
+                self.main_window,
+                "Confirmer restauration",
+                "Restaurer les valeurs par défaut (les changements actuels ne seront pas sauvegardés) ?",
+                QMessageBox.Yes | QMessageBox.No,
+            )
+            if reply != QMessageBox.Yes:
+                return
+        except Exception:
+            # Si la boîte de dialogue échoue, continuer sans confirmer
+            self.main_window.set_log_text("Impossible d'afficher la boîte de confirmation, restauration par défaut annulée.")
+
         default_config = Config()
         self.config.display.screen_width = default_config.display.screen_width
         self.config.display.screen_height = default_config.display.screen_height
