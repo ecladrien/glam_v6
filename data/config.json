@@ -24,7 +24,7 @@
     },
     "camera": {
         "rtsp_stream": "/h264Preview_01_main",
-        "onvif_port": 8000,
+        "onvif_port": 800,
         "rtsp_user": "admin"
     }
 }

@@ -7,13 +7,17 @@ import os
 from PySide6.QtGui import QPixmap
 import logging
 
+from ..services.home_service import HomeService
+
 logger = logging.getLogger(__name__)
+
 
 class HomePageManager:
     def __init__(self, main_window, config: Config):
         self.main_window = main_window
         self.config = config
         self.ui = main_window.ui
+        self.home_service = HomeService(config)
         self._connect_buttons()
         # Afficher la home_page
         try:
@@ -26,14 +30,7 @@ class HomePageManager:
 
     def _load_and_apply_background(self):
         try:
-            head_path = Path(getattr(self.config.paths, "head_img", ""))
-            default_path = Path(getattr(self.config.paths, "default_img", ""))
-
-            chosen = None
-            if head_path and head_path.exists():
-                chosen = head_path
-            elif default_path and default_path.exists():
-                chosen = default_path
+            chosen = self.home_service.resolve_background_path()
 
             if chosen is None:
                 msg = "Aucune image de fond disponible (head_img ou default_img) - vérifier la config"
@@ -65,8 +62,7 @@ class HomePageManager:
     def set_head_image(self, path: Path):
         """Met à jour `config.paths.head_img`, sauvegarde la config et rafraîchit l'affichage."""
         try:
-            self.config.paths.head_img = Path(path)
-            self.config.save()
+            self.home_service.set_head_image(Path(path))
             self._load_and_apply_background()
         except Exception as e:
             logger.exception("Erreur lors de la mise à jour du head_img: %s", e)
@@ -122,7 +118,8 @@ class HomePageManager:
             if hasattr(self.main_window, 'setup_page_manager') and hasattr(self.main_window.setup_page_manager, 'save_fields_to_config'):
                 self.main_window.setup_page_manager.save_fields_to_config()
             else:
-                self.config.save()
+                # delegate to service for saving
+                self.home_service.save_config()
         except Exception as e:
             logger.exception("Erreur lors de la sauvegarde de la config: %s", e)
             if hasattr(self.main_window, 'set_log_text'):

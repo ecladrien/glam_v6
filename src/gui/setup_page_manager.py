@@ -2,41 +2,47 @@ from ..config.manager import Config
 from PySide6.QtWidgets import QLineEdit, QPushButton, QFileDialog, QMessageBox
 from pathlib import Path
 import logging
-import shutil
+
+from ..services.setup_service import SetupService
 
 logger = logging.getLogger(__name__)
+
 
 class SetupPageManager:
     def __init__(self, main_window, config: Config):
         self.main_window = main_window
         self.config = config
         self.ui = main_window.ui
+        self.setup_service = SetupService(config)
         self._connect_buttons()
         self.load_config_to_fields()
 
     def load_config_to_fields(self):
         try:
-            self.ui.width_screen_line_edit.setText(str(self.config.display.screen_width))
-            self.ui.height_screen_line_edit.setText(str(self.config.display.screen_height))
-            self.ui.adress_ip_line_edit.setText(str(getattr(self.config.network, 'device_ip', '')))
-            self.ui.adress_ip_cam_line_edit.setText(str(getattr(self.config.network, 'camera_ip', '')))
-            self.ui.adress_ip_artnet_line_edit.setText(str(getattr(self.config.network, 'artnet_network', '')))
-            self.ui.port_cam_line_edit.setText(str(getattr(self.config.camera, 'onvif_port', '')))
-            self.ui.user_cam_line_edit.setText(str(getattr(self.config.camera, 'rtsp_user', '')))
-            self.ui.password_cam_line_edit.setText(str(getattr(self.config.camera, 'rtsp_password', '')))
+            vals = self.setup_service.get_config_values()
+            self.ui.width_screen_line_edit.setText(str(vals.get('screen_width', '')))
+            self.ui.height_screen_line_edit.setText(str(vals.get('screen_height', '')))
+            self.ui.adress_ip_line_edit.setText(str(vals.get('device_ip', '')))
+            self.ui.adress_ip_cam_line_edit.setText(str(vals.get('camera_ip', '')))
+            self.ui.adress_ip_artnet_line_edit.setText(str(vals.get('artnet_network', '')))
+            self.ui.port_cam_line_edit.setText(str(vals.get('onvif_port', '')))
+            self.ui.user_cam_line_edit.setText(str(vals.get('rtsp_user', '')))
+            self.ui.password_cam_line_edit.setText(str(vals.get('rtsp_password', '')))
         except Exception as e:
             logger.exception("Erreur lors du chargement de la configuration: %s", e)
 
     def save_fields_to_config(self):
         try:
-            self.config.display.screen_width = int(self.ui.width_screen_line_edit.text())
-            self.config.display.screen_height = int(self.ui.height_screen_line_edit.text())
-            self.config.network.device_ip = self.ui.adress_ip_line_edit.text()
-            self.config.network.camera_ip = self.ui.adress_ip_cam_line_edit.text()
-            self.config.network.artnet_network = self.ui.adress_ip_artnet_line_edit.text()
-            self.config.camera.onvif_port = int(self.ui.port_cam_line_edit.text())
-            self.config.camera.rtsp_user = self.ui.user_cam_line_edit.text()
-            self.config.camera.rtsp_password = self.ui.password_cam_line_edit.text()
+            values = {
+                'screen_width': int(self.ui.width_screen_line_edit.text()),
+                'screen_height': int(self.ui.height_screen_line_edit.text()),
+                'device_ip': self.ui.adress_ip_line_edit.text(),
+                'camera_ip': self.ui.adress_ip_cam_line_edit.text(),
+                'artnet_network': self.ui.adress_ip_artnet_line_edit.text(),
+                'onvif_port': int(self.ui.port_cam_line_edit.text()),
+                'rtsp_user': self.ui.user_cam_line_edit.text(),
+                'rtsp_password': self.ui.password_cam_line_edit.text(),
+            }
             reply = QMessageBox.question(
                 self.main_window,
                 "Confirmer sauvegarde",
@@ -45,8 +51,8 @@ class SetupPageManager:
             )
             if reply != QMessageBox.Yes:
                 return
-            
-            self.config.save()
+
+            self.setup_service.save_config_values(values)
             if hasattr(self.main_window, 'set_log_text'):
                 self.main_window.set_log_text('Configuration sauvegardée.')
         except Exception as e:
@@ -69,19 +75,10 @@ class SetupPageManager:
             # Si la boîte de dialogue échoue, continuer sans confirmer
             self.main_window.set_log_text("Impossible d'afficher la boîte de confirmation, restauration par défaut annulée.")
 
-        default_config = Config()
-        self.config.display.screen_width = default_config.display.screen_width
-        self.config.display.screen_height = default_config.display.screen_height
-        self.config.network.device_ip = default_config.network.device_ip
-        self.config.network.camera_ip = default_config.network.camera_ip
-        self.config.network.artnet_network = default_config.network.artnet_network
-        self.config.camera.onvif_port = default_config.camera.onvif_port
-        self.config.camera.rtsp_user = default_config.camera.rtsp_user
-        self.config.camera.rtsp_password = default_config.camera.rtsp_password
+        self.setup_service.reset_to_defaults()
         self.load_config_to_fields()
         if hasattr(self.main_window, 'set_log_text'):
             self.main_window.set_log_text('Valeurs par défaut restaurées (non sauvegardées).')
-        
 
     def _connect_buttons(self):
         self.ui.save_setup_button.clicked.connect(self.save_fields_to_config)
@@ -113,31 +110,8 @@ class SetupPageManager:
             if not files:
                 return
 
-            target_dir = self.config.paths.plan_dir
-            target_dir.mkdir(parents=True, exist_ok=True)
-
-            for f in files:
-                src = Path(f)
-                if not src.exists():
-                    logger.warning("Fichier sélectionné introuvable: %s", src)
-                    continue
-
-                dest = target_dir / src.name
-                # Si le fichier existe déjà, ajouter un suffixe numérique
-                if dest.exists():
-                    stem = src.stem
-                    suffix = src.suffix
-                    i = 1
-                    while True:
-                        candidate = target_dir / f"{stem}_{i}{suffix}"
-                        if not candidate.exists():
-                            dest = candidate
-                            break
-                        i += 1
-
-                shutil.copy2(src, dest)
-
-            msg = f"{len(files)} fichier(s) copiés dans {target_dir}"
+            result = self.setup_service.add_plans([Path(f) for f in files])
+            msg = f"{result.get('count_copied', 0)} fichier(s) copiés dans {result.get('target_dir')}"
             logger.info(msg)
             if hasattr(self.main_window, 'set_log_text'):
                 self.main_window.set_log_text(msg)
@@ -177,19 +151,8 @@ class SetupPageManager:
             if reply != QMessageBox.Yes:
                 return
 
-            deleted = 0
-            for f in files:
-                p = Path(f)
-                try:
-                    if p.exists():
-                        p.unlink()
-                        deleted += 1
-                    else:
-                        logger.warning("Fichier introuvable lors de la suppression: %s", p)
-                except Exception:
-                    logger.exception("Erreur suppression fichier: %s", p)
-
-            msg = f"{deleted}/{count} fichier(s) supprimés de {target_dir}"
+            result = self.setup_service.delete_plans([Path(f) for f in files])
+            msg = f"{result.get('deleted', 0)}/{result.get('total', 0)} fichier(s) supprimés de {result.get('target_dir')}"
             logger.info(msg)
             if hasattr(self.main_window, 'set_log_text'):
                 self.main_window.set_log_text(msg)
@@ -211,9 +174,8 @@ class SetupPageManager:
             if not fname:
                 return
 
-            # Mettre à jour la config
-            self.config.paths.head_img = Path(fname)
-            self.config.save()
+            # Mettre à jour via le service
+            self.setup_service.set_head_image(Path(fname))
 
             # Si la page d'accueil est présente, demander le rafraîchissement
             if hasattr(self.main_window, 'home_page_manager') and hasattr(self.main_window.home_page_manager, 'set_head_image'):

@@ -17,6 +17,8 @@ from PySide6.QtCore import QUrl
 from PySide6.QtWidgets import QScrollArea, QDialog
 from PySide6.QtCore import QSize
 
+from ..services.plan_service import PlanService
+
 
 class ClickableLabel(QLabel):
     clicked = Signal()
@@ -37,6 +39,7 @@ class PlanPageManager:
     def __init__(self, main_window, config: Config):
         self.main_window = main_window
         self.config = config
+        self.plan_service = PlanService(config)
         self.ui = main_window.ui
         self._current_fullscreen = None
  
@@ -70,23 +73,10 @@ class PlanPageManager:
             layout.addWidget(self.scroll)
 
     def _load_plan_files(self) -> None:
-        # Use the configured paths.plan_dir when available; default to ressources/plans
-        plan_dir = Path(getattr(self.config.paths, 'plan_dir', Path("./ressources/plans")))
-        # If relative path, consider project root (one level up from src)
-        if not plan_dir.exists():
-            alt = Path.cwd().parent / plan_dir
-            if alt.exists():
-                plan_dir = alt
-
-        plan_dir.mkdir(parents=True, exist_ok=True)
-
+        # Delegate plan file discovery to the PlanService
         files: List[Path] = []
         try:
-            for p in sorted(plan_dir.iterdir()):
-                if not p.is_file():
-                    continue
-                if p.suffix.lower() in self.IMAGE_EXT.union(self.PDF_EXT):
-                    files.append(p)
+            files = self.plan_service.list_plan_files()
         except Exception:
             files = []
 

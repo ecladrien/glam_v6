@@ -4,11 +4,12 @@ from ..config.manager import Config
 import logging
 from typing import List
 import threading
-import socket
 from pathlib import Path
 
 from PySide6.QtWidgets import QPushButton
 from PySide6.QtCore import QTimer
+
+from ..services.camera_service import CameraService
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,7 @@ class CamPageManager:
         self.main_window = main_window
         self.config = config
         self.ui = main_window.ui
+        self.camera_service = CameraService()
 
         try:
             self.ui.search_cam_button.clicked.connect(self._on_search_clicked)
@@ -70,32 +72,8 @@ class CamPageManager:
     # Network scan
     # -------------------------
     def _scan_subnet_for_rtsp(self, base_ip: str, limit: int = 254, timeout: float = 0.4) -> List[str]:
-        found: List[str] = []
-        try:
-            parts = base_ip.split(".")
-            if len(parts) < 4:
-                return found
-            prefix = ".".join(parts[:3]) + "."
-            for i in range(1, limit):
-                ip = f"{prefix}{i}"
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                s.settimeout(timeout)
-                try:
-                    s.connect((ip, 554))
-                    found.append(ip)
-                except Exception as e:
-                    logger.debug("connect to %s failed: %s", ip, e)
-                finally:
-                    try:
-                        s.close()
-                    except Exception as e:
-                        logger.debug("socket close failed for %s: %s", ip, e)
-                # avoid long blocking scans
-                if len(found) >= 8:
-                    break
-        except Exception:
-            logger.exception("Error scanning subnet")
-        return found
+        # Delegate to CameraService
+        return self.camera_service.scan_subnet_for_rtsp(base_ip, limit=limit, timeout=timeout)
 
     def _on_search_clicked(self) -> None:
         # Run scan in background thread and add buttons on the main thread
@@ -104,24 +82,7 @@ class CamPageManager:
             # First check configured camera ip
             try:
                 cfg_ip = getattr(self.config.network, "camera_ip", None)
-                if cfg_ip:
-                    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    s.settimeout(0.4)
-                    try:
-                        s.connect((cfg_ip, 554))
-                        ips.append(cfg_ip)
-                    except Exception as e:
-                        logger.debug("connect to configured camera %s failed: %s", cfg_ip, e)
-                    finally:
-                        try:
-                            s.close()
-                        except Exception as e:
-                            logger.debug("socket close failed for configured camera %s: %s", cfg_ip, e)
-
-                # If none found yet, try scanning subnet derived from cfg_ip
-                if not ips and cfg_ip:
-                    candidates = self._scan_subnet_for_rtsp(cfg_ip)
-                    ips.extend(candidates)
+                ips = self.camera_service.discover_cameras(cfg_ip)
             except Exception:
                 logger.exception("Error during camera discovery")
 

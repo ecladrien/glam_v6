@@ -1,5 +1,6 @@
 from ..config.manager import Config
 from ..hardware.arduino_controller import ArduinoController
+from ..services.measurement_service import MeasurementService
 from PySide6.QtWidgets import QFileDialog, QMessageBox
 from PySide6.QtCore import QTimer
 from PySide6.QtGui import QPixmap, QPainter, QColor, QPen
@@ -16,6 +17,7 @@ class MeasurementPageManager:
     def __init__(self, main_window, config: Config):
         self.main_window = main_window
         self.config = config
+        self.measurement_service = MeasurementService(config)
         self.ui = main_window.ui
 
         # Create or accept an Arduino controller instance
@@ -144,13 +146,8 @@ class MeasurementPageManager:
 
     def _on_save_graph(self):
         try:
-            # Get configured data file path from config.paths.data_file or legacy
-            data_file = None
-            try:
-                data_file = Path(self.config.paths.data_file)
-            except Exception:
-                data_file = Path(getattr(self.config, 'data_file', 'data/measurements.csv'))
-
+            # Resolve data file via service
+            data_file = self.measurement_service.get_data_file()
             if not data_file.exists():
                 msg = f"Fichier de données introuvable: {data_file}"
                 logger.warning(msg)
@@ -170,8 +167,8 @@ class MeasurementPageManager:
                 if reply != QMessageBox.StandardButton.Yes:
                     return
 
-            dest_file.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(str(data_file), str(dest_file))
+            # Use service to copy
+            self.measurement_service.copy_to(data_file, dest_file)
             msg = f"Fichier enregistré sous: {dest_file}"
             logger.info(msg)
             if hasattr(self.main_window, 'set_log_text'):
@@ -190,22 +187,10 @@ class MeasurementPageManager:
             if reply != QMessageBox.StandardButton.Yes:
                 return
 
-            # Determine data file
-            try:
-                data_file = Path(self.config.paths.data_file)
-            except Exception:
-                data_file = Path(getattr(self.config, 'data_file', 'data/measurements.csv'))
 
-            data_file.parent.mkdir(parents=True, exist_ok=True)
-            # Truncate and write header
-            with open(data_file, 'w', newline='') as fh:
-                writer = csv.writer(fh)
-                # Use ArduinoController.FIELDNAMES if available
-                header = getattr(ArduinoController, 'FIELDNAMES', None)
-                if header:
-                    writer.writerow(header)
-                else:
-                    writer.writerow(['time'])
+            # Reset file via service
+            data_file = self.measurement_service.get_data_file()
+            self.measurement_service.reset_file(data_file)
 
             msg = f"Fichier de mesures vidé: {data_file}"
             logger.info(msg)
