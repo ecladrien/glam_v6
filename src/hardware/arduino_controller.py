@@ -87,8 +87,8 @@ class ArduinoController:
         if self._serial:
             try:
                 self._serial.close()
-            except Exception:
-                pass
+            except Exception as e:
+                logger.debug("Failed to close previous serial connection: %s", e)
 
         self._serial = SerialManager(device=self.arduino_port, timeout=2)
         self._arduino = ArduinoApi(connection=self._serial)
@@ -99,8 +99,8 @@ class ArduinoController:
         try:
             if self._serial:
                 self._serial.close()
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Error closing serial during disconnect: %s", e)
         self._serial = None
         self._arduino = None
         self.connected = False
@@ -235,8 +235,8 @@ class ArduinoController:
             self._thread.join(timeout=join_timeout)
         try:
             self._disconnect()
-        except Exception:
-            pass
+        except Exception as e:
+            logger.exception("Error during stop_record disconnect: %s", e)
         logger.info("Stopped Arduino recording")
 
     # ----- Utilities -----

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainframejFyvFY.ui'
+## Form generated from reading UI file 'MainframeocrBlY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.1
 ##
@@ -417,13 +417,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QVBoxLayout(self.cam_page)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.grid_layout_widget = QWidget(self.cam_page)
-        self.grid_layout_widget.setObjectName(u"grid_layout_widget")
-        self.horizontalLayout_15 = QHBoxLayout(self.grid_layout_widget)
+        self.grid_cam_layout_widget = QWidget(self.cam_page)
+        self.grid_cam_layout_widget.setObjectName(u"grid_cam_layout_widget")
+        self.horizontalLayout_15 = QHBoxLayout(self.grid_cam_layout_widget)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
         self.horizontalLayout_15.setContentsMargins(0, 0, 0, 0)
 
-        self.verticalLayout_5.addWidget(self.grid_layout_widget)
+        self.verticalLayout_5.addWidget(self.grid_cam_layout_widget)
 
         self.button_search_cam_widget = QWidget(self.cam_page)
         self.button_search_cam_widget.setObjectName(u"button_search_cam_widget")
@@ -431,15 +431,15 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5 = QHBoxLayout(self.button_search_cam_widget)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.search_button = QPushButton(self.button_search_cam_widget)
-        self.search_button.setObjectName(u"search_button")
-        self.search_button.setMaximumSize(QSize(100, 100))
+        self.search_cam_button = QPushButton(self.button_search_cam_widget)
+        self.search_cam_button.setObjectName(u"search_cam_button")
+        self.search_cam_button.setMaximumSize(QSize(100, 100))
         icon11 = QIcon()
         icon11.addFile(u":/icons/ressources/icons/search_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.search_button.setIcon(icon11)
-        self.search_button.setIconSize(QSize(30, 30))
+        self.search_cam_button.setIcon(icon11)
+        self.search_cam_button.setIconSize(QSize(30, 30))
 
-        self.horizontalLayout_5.addWidget(self.search_button)
+        self.horizontalLayout_5.addWidget(self.search_cam_button)
 
 
         self.verticalLayout_5.addWidget(self.button_search_cam_widget)
@@ -758,7 +758,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.main_frame.setCurrentIndex(4)
+        self.main_frame.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -788,7 +788,7 @@ class Ui_MainWindow(object):
         self.measurement_stop_button.setText(QCoreApplication.translate("MainWindow", u"Stop", None))
         self.measurement_reset_button.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
         self.measurement_savegraph_button.setText(QCoreApplication.translate("MainWindow", u"Save CSV", None))
-        self.search_button.setText(QCoreApplication.translate("MainWindow", u"Search", None))
+        self.search_cam_button.setText(QCoreApplication.translate("MainWindow", u"Search", None))
         self.path_qlc_file_label.setText(QCoreApplication.translate("MainWindow", u"Chemin fichier :", None))
         self.path_choose_qlc_file_label.setText("")
         self.choose_qlc_file_label.setText(QCoreApplication.translate("MainWindow", u"Choisir fichier :", None))

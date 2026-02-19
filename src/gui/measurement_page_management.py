@@ -21,7 +21,8 @@ class MeasurementPageManager:
         # Create or accept an Arduino controller instance
         try:
             self.arduino = ArduinoController(config=self.config)
-        except Exception:
+        except Exception as e:
+            logger.exception("Failed to init ArduinoController with config, falling back to default: %s", e)
             self.arduino = ArduinoController()
 
         # Wire UI buttons if present
@@ -42,8 +43,8 @@ class MeasurementPageManager:
             self._timer = QTimer(self.main_window)
             self._timer.timeout.connect(self._poll_values)
             self._timer.start(1000)
-        except Exception:
-            pass
+        except Exception as e:
+            logger.exception("Failed to start measurement timer: %s", e)
 
         # Graph buffers (rolling) and initialization
         try:
@@ -52,7 +53,8 @@ class MeasurementPageManager:
             self._buf_p1 = deque([0.0] * self._max_points, maxlen=self._max_points)
             self._buf_p2 = deque([0.0] * self._max_points, maxlen=self._max_points)
             self._buf_p3 = deque([0.0] * self._max_points, maxlen=self._max_points)
-        except Exception:
+        except Exception as e:
+            logger.exception("Failed to initialize graph buffers, using empty buffers: %s", e)
             self._buf_neutre = deque()
             self._buf_p1 = deque()
             self._buf_p2 = deque()
@@ -65,9 +67,11 @@ class MeasurementPageManager:
                 # Prefer latest cached values from controller
                 vals = self.arduino.get_latest_values()
             except Exception:
+                logger.debug("get_latest_values() failed, trying read_values()")
                 try:
                     vals = self.arduino.read_values()
-                except Exception:
+                except Exception as e:
+                    logger.exception("read_values() failed: %s", e)
                     vals = None
 
             if not vals:
@@ -87,8 +91,8 @@ class MeasurementPageManager:
                     self._buf_p1.append(float(p1) if p1 is not None else 0.0)
                     self._buf_p2.append(float(p2) if p2 is not None else 0.0)
                     self._buf_p3.append(float(p3) if p3 is not None else 0.0)
-                except Exception:
-                    pass
+                except Exception as e:
+                    logger.exception('Failed appending values to buffers: %s', e)
 
                 # Redraw graph
                 try:
@@ -97,8 +101,8 @@ class MeasurementPageManager:
                     logger.exception('Erreur dessin graphe')
             except Exception:
                 logger.exception('Erreur mise à jour labels measurement')
-        except Exception:
-            pass
+        except Exception as e:
+            logger.exception('Polling measurement values failed: %s', e)
 
     def _on_start(self):
         try:

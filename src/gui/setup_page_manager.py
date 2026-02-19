@@ -89,19 +89,18 @@ class SetupPageManager:
         # Choix d'image d'arrière-plan (head image)
         try:
             self.ui.background_img_choose_button.clicked.connect(self._background_img_choose_button_clicked)
-        except Exception:
-            # Si le widget n'existe pas dans l'UI, ignorer silencieusement
-            pass
+        except Exception as e:
+            logger.debug("background_img_choose_button not available or not connectable: %s", e)
         # Charger des plans (images / PDF) dans ressources/plans
         try:
             self.ui.plan_charge_button.clicked.connect(self._plan_charge_button_clicked)
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("plan_charge_button not available or not connectable: %s", e)
         # Supprimer des plans de ressources/plans
         try:
             self.ui.plan_delete_button.clicked.connect(self._plan_delete_button_clicked)
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("plan_delete_button not available or not connectable: %s", e)
 
     def _plan_charge_button_clicked(self):
         try:

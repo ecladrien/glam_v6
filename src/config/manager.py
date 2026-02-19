@@ -1,12 +1,17 @@
 from __future__ import annotations
-from pydantic import BaseModel, Field, SecretStr
+from pydantic import BaseModel, Field, SecretStr, model_validator
 import os
+import logging
 from typing import List, Optional
 from pathlib import Path
 import json
 
 
-PATHCONFIG = Path("data/config.json")
+# Resolve project root (two levels up from src/config)
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PATHCONFIG = PROJECT_ROOT / "data" / "config.json"
+
+logger = logging.getLogger(__name__)
 
 class DisplayConfig(BaseModel):
     screen_width: int = 1920
@@ -22,16 +27,17 @@ class NetworkConfig(BaseModel):
     artnet_network: str = "2.0.0.69"
 
 class PathsConfig(BaseModel):
-    data_file: Path = Path("./data/measurements.csv")
-    plan_dir: Path = Path("./ressources/plans")
-    default_img: Path = Path("./ressources/img/unicorn.png")
-    head_img: Path = Path("./ressources/img/unicorn.png")
+    data_file: Path = PROJECT_ROOT / "data" / "measurements.csv"
+    plan_dir: Path = PROJECT_ROOT / "ressources" / "plans"
+    default_img: Path = PROJECT_ROOT / "ressources" / "img" / "unicorn.png"
+    head_img: Path = PROJECT_ROOT / "ressources" / "img" / "unicorn.png"
     
 class CameraConfig(BaseModel):
     rtsp_stream: str = "/h264Preview_01_main"
     onvif_port: int = 8000
     rtsp_user: str = "admin"
-    rtsp_password: SecretStr = Field(default_factory=lambda: SecretStr("admin123"))
+    # Do not embed a plaintext default password in source; prefer env var
+    rtsp_password: SecretStr = Field(default_factory=lambda: SecretStr(os.getenv("RTSP_PASSWORD", "")))
 
 class QlcConfig(BaseModel):
     qlc_folder_path: Path = Path("./ressources/qlc_files")
@@ -46,6 +52,49 @@ class Config(BaseModel):
     paths: PathsConfig = Field(default_factory=PathsConfig)
     camera: CameraConfig = Field(default_factory=CameraConfig)
 
+    @model_validator(mode="before")
+    def _normalize_input(cls, values: dict):
+        """Normalize legacy / convenience kwargs to nested structure.
+
+        Allows calls like `Config(screen_width=800, screen_height=600)` or
+        `Config(default_img="...", head_img="...")` by moving those keys
+        into the appropriate nested sub-dicts (`display`, `paths`).
+        """
+        # Normalize display simple keys
+        display = dict(values.get("display", {})) if isinstance(values, dict) else {}
+        if "screen_width" in values:
+            display["screen_width"] = values.pop("screen_width")
+        if "screen_height" in values:
+            display["screen_height"] = values.pop("screen_height")
+        values["display"] = display
+
+        # Normalize paths simple keys
+        paths = dict(values.get("paths", {})) if isinstance(values, dict) else {}
+        if "default_img" in values:
+            paths["default_img"] = values.pop("default_img")
+        if "head_img" in values:
+            paths["head_img"] = values.pop("head_img")
+        values["paths"] = paths
+
+        return values
+
+    # Convenience properties for backward-compatibility with older callers/tests
+    @property
+    def screen_width(self) -> int:
+        return int(self.display.screen_width)
+
+    @property
+    def screen_height(self) -> int:
+        return int(self.display.screen_height)
+
+    @property
+    def default_img(self):
+        return self.paths.default_img
+
+    @property
+    def head_img(self):
+        return self.paths.head_img
+
     @classmethod
     def load_default(cls, path: Optional[str] = None) -> "Config":
         """Load config from file if exists, else return defaults."""
@@ -53,7 +102,6 @@ class Config(BaseModel):
             path_obj = Path(PATHCONFIG)
         else:
             path_obj = Path(path)
-
         try:
             if path_obj.exists():
                 data = json.loads(path_obj.read_text())
@@ -64,8 +112,7 @@ class Config(BaseModel):
                     cfg.camera.rtsp_password = SecretStr(env_pw)
                 return cfg
         except Exception:
-            # If file corrupt or parsing fails, fall back to defaults
-            pass
+            logger.exception("Failed to load config from %s; falling back to defaults", path_obj)
 
         cfg = cls()
         env_pw = os.getenv("RTSP_PASSWORD")

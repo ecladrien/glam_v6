@@ -14,7 +14,7 @@
     },
     "qlc": {
         "qlc_folder_path": "/Users/adrien/Documents/Stockage_mac/Realisations/Codage/Python/Glam/Glam_v6/ressources/qlc_files",
-        "qlc_file_path": "/Users/adrien/Documents/Stockage_mac/Realisations/Codage/Python/Glam/Glam_v6/ressources/qlc_files/default.qxw"
+        "qlc_file_path": "ressources/qlc_files/default.qxw"
     },
     "paths": {
         "data_file": "data/measurements.csv",

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from ..config.manager import Config
+from ..config.manager import Config, QlcConfig
 from pathlib import Path
 from typing import List
 import logging
@@ -13,16 +13,42 @@ class QlcPageManager:
         self.main_window = main_window
         self.config = config
         self.ui = main_window.ui
-        # Ensure UI label shows current qlc file (or default)
+        # Ensure UI label shows current qlc file (or default) and validate existence
         try:
             current_file = getattr(self.config.qlc, 'qlc_file_path', None)
+            default_file = QlcConfig().qlc_file_path
+
+            chosen_path = None
             if current_file:
-                self.ui.path_choose_qlc_file_label.setText(str(current_file))
+                p = Path(current_file)
+                if not p.exists():
+                    alt = Path.cwd().parent / p
+                    if alt.exists():
+                        p = alt
+
+                if not p.exists():
+                    # reset to default if the chosen file no longer exists
+                    try:
+                        self.config.qlc.qlc_file_path = default_file
+                        self.config.save()
+                        chosen_path = default_file
+                        logger.debug('Reset qlc_file_path to default because stored file was missing')
+                    except Exception:
+                        logger.exception('Failed to reset qlc_file_path to default')
+                        chosen_path = default_file
+                else:
+                    chosen_path = p
             else:
-                self.ui.path_choose_qlc_file_label.setText(str(getattr(self.config.qlc, 'qlc_file_path', '')))
+                chosen_path = default_file
+
+            # update UI label
+            try:
+                self.ui.path_choose_qlc_file_label.setText(str(chosen_path))
+            except Exception:
+                logger.debug('Failed to set initial qlc file label text')
         except Exception:
             # best-effort: ignore UI errors
-            pass
+            logger.debug('Error while validating initial qlc file')
 
         # Connect the choose button to open a file dialog for .qxw files
         try:
@@ -53,21 +79,21 @@ class QlcPageManager:
 
                     try:
                         self.ui.path_choose_qlc_file_label.setText(str(p))
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        logger.debug('Failed to set qlc file label to chosen file: %s', e)
                 else:
                     # No selection: show configured file path fallback
                     try:
                         self.ui.path_choose_qlc_file_label.setText(str(getattr(self.config.qlc, 'qlc_file_path', '')))
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        logger.debug('Failed to set qlc file label fallback: %s', e)
 
             # connect signal
             try:
                 self.ui.choose_qlc_file_button.clicked.connect(_choose_qlc_file)
-            except Exception:
+            except Exception as e:
                 # UI element may not exist in some contexts
-                logger.debug("choose_qlc_file_button not available to connect")
+                logger.debug("choose_qlc_file_button not available to connect: %s", e)
         except Exception:
             logger.debug("PySide6 not available or QFileDialog import failed")
 
@@ -120,8 +146,8 @@ class QlcPageManager:
 
             try:
                 self.ui.run_qlc_button.clicked.connect(_run_qlc)
-            except Exception:
-                logger.debug('run_qlc_button not available to connect')
+            except Exception as e:
+                logger.debug('run_qlc_button not available to connect: %s', e)
         except Exception:
             logger.debug('Failed to set up run_qlc_button handler')
 

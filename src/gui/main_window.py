@@ -6,8 +6,9 @@ from PySide6.QtWidgets import QMainWindow
 from .home_page_manager import HomePageManager
 from .plan_page_manager import PlanPageManager
 from .qlc_page_manager import QlcPageManager
+from .cam_page_manager import CamPageManager
 from .setup_page_manager import SetupPageManager
-from .measurement_page_managment import MeasurementPageManager
+from .measurement_page_management import MeasurementPageManager
 from .Ui_MainWindow import Ui_MainWindow
 import logging
 
@@ -82,6 +83,12 @@ class MainWindow(QMainWindow):
             self.measurement_page_manager = MeasurementPageManager(self, self.cfg)
         except Exception as e:
             logger.exception("Erreur affichage measurement_page: %s", e)
+
+        # Initialiser la gestion de la cam_page (détecte et affiche les caméras)
+        try:
+            self.cam_page_manager = CamPageManager(self, self.cfg)
+        except Exception as e:
+            logger.exception("Erreur affichage cam_page: %s", e)
 
         # Initialiser la gestion de la qlc_page
         try:
