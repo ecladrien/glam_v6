@@ -22,10 +22,10 @@ fi
 
 # Dépendances Python principales (hors OpenCV pour gérer le fallback ARM)
 "${VENV_DIR}/bin/pip" install \
-  pytest>=7.0 \
-  pydantic>=2.0 \
-  PySide6>=6.10 \
-  nanpy>=0.9.6 \
+  "pytest>=7.0" \
+  "pydantic>=2.0" \
+  "PySide6>=6.10" \
+  "nanpy>=0.9.6" \
   onvif_zeep==0.2.12
 
 echo "[GLAM] Installation OpenCV (tentative wheel standard puis fallback headless)"

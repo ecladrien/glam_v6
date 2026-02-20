@@ -78,8 +78,8 @@ pip install pytest pydantic
  pytest -q
  ```
 
- ## Notes d'implémentation importantes
- - Le mot de passe RTSP est stocké en mémoire comme `SecretStr` (Pydantic) et n'est pas écrit dans le `config.json` lors de l'appel `Config.save()`.
+## Notes d'implémentation importantes
+- Le mot de passe RTSP peut être injecté via la variable d'environnement `RTSP_PASSWORD` et n'est pas écrit dans le `config.json` lors de l'appel `Config.save()`.
  - La détection de caméras effectue un scan simple (port 554) et limite les résultats pour éviter des scans trop longs.
  - L'accès au matériel (Arduino, caméra ONVIF) est optionnel : le code gère l'absence de dépendances et bascule en mode simulé/limité.
 

@@ -101,6 +101,23 @@ class MainWindow(QMainWindow):
             self.setup_page_manager = SetupPageManager(self, self.cfg)
         except Exception as e:
             logger.exception("Erreur affichage setup_page: %s", e)
+
+    def closeEvent(self, event):
+        try:
+            if hasattr(self, "measurement_page_manager"):
+                cleanup = getattr(self.measurement_page_manager, "_cleanup", None)
+                if callable(cleanup):
+                    cleanup()
+        except Exception:
+            logger.exception("Erreur fermeture measurement_page_manager")
+
+        try:
+            if hasattr(self, "cam_page_manager"):
+                self.cam_page_manager.stop_stream()
+        except Exception:
+            logger.exception("Erreur arrêt cam_page_manager")
+
+        super().closeEvent(event)
         
     def _update_time_label(self):
         try:

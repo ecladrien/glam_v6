@@ -1,5 +1,5 @@
 from __future__ import annotations
-from pydantic import BaseModel, Field, SecretStr, model_validator
+from pydantic import BaseModel, Field, model_validator
 import os
 import logging
 from typing import List, Optional
@@ -36,8 +36,7 @@ class CameraConfig(BaseModel):
     rtsp_stream: str = "/h264Preview_01_main"
     onvif_port: int = 8000
     rtsp_user: str = "admin"
-    # Do not embed a plaintext default password in source; prefer env var
-    rtsp_password: str ="Glam4ever:)"#rtsp_password: SecretStr = Field(default_factory=lambda: SecretStr(os.getenv("RTSP_PASSWORD", "")))
+    rtsp_password: str = Field(default_factory=lambda: os.getenv("RTSP_PASSWORD", ""))
 
 class QlcConfig(BaseModel):
     qlc_folder_path: Path = Path("./ressources/qlc_files")
@@ -150,7 +149,7 @@ class Config(BaseModel):
                 # Allow overriding secret via environment variable
                 env_pw = os.getenv("RTSP_PASSWORD")
                 if env_pw:
-                    cfg.camera.rtsp_password = SecretStr(env_pw)
+                    cfg.camera.rtsp_password = env_pw
                 return cfg
         except Exception:
             logger.exception("Failed to load config from %s; falling back to defaults", path_obj)
@@ -158,7 +157,7 @@ class Config(BaseModel):
         cfg = cls()
         env_pw = os.getenv("RTSP_PASSWORD")
         if env_pw:
-            cfg.camera.rtsp_password = SecretStr(env_pw)
+            cfg.camera.rtsp_password = env_pw
         return cfg
 
     def save(self, path: Optional[str] = None) -> None:

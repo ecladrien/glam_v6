@@ -20,7 +20,7 @@
         "data_file": "data/measurements.csv",
         "plan_dir": "ressources/plans",
         "default_img": "ressources/img/unicorn.png",
-        "head_img": "ressources/img/Unicorn.png"
+        "head_img": "ressources/img/unicorn.png"
     },
     "camera": {
         "rtsp_stream": "/h264Preview_01_main",

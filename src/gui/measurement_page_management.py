@@ -57,10 +57,30 @@ class MeasurementPageManager:
             self._buf_p3 = deque([0.0] * self._max_points, maxlen=self._max_points)
         except Exception as e:
             logger.exception("Failed to initialize graph buffers, using empty buffers: %s", e)
+            self._max_points = 200
             self._buf_neutre = deque()
             self._buf_p1 = deque()
             self._buf_p2 = deque()
             self._buf_p3 = deque()
+
+        # Ensure timer/thread cleanup when the main window is destroyed
+        try:
+            self.main_window.destroyed.connect(lambda *_: self._cleanup())
+        except Exception as e:
+            logger.debug("Failed to bind measurement cleanup on destroy: %s", e)
+
+    def _cleanup(self) -> None:
+        try:
+            if hasattr(self, "_timer") and self._timer is not None:
+                self._timer.stop()
+        except Exception:
+            logger.exception("Failed to stop measurement timer")
+
+        try:
+            if hasattr(self, "arduino") and self.arduino is not None:
+                self.arduino.stop_record()
+        except Exception:
+            logger.exception("Failed to stop Arduino controller during cleanup")
 
     def _poll_values(self):
         try:
