@@ -120,6 +120,25 @@ class MainWindow(QMainWindow):
 
         super().closeEvent(event)
         
+    def keyPressEvent(self, event):
+        """Gérer les événements clavier - Échap pour basculer plein écran."""
+        try:
+            if event.key() == Qt.Key.Key_Escape:
+                if self.isFullScreen():
+                    self.showNormal()
+                    if hasattr(self, 'set_log_text'):
+                        self.set_log_text("Mode plein écran désactivé")
+                else:
+                    self.showFullScreen()
+                    if hasattr(self, 'set_log_text'):
+                        self.set_log_text("Mode plein écran activé")
+                return
+        except Exception as e:
+            logger.exception("Erreur gestion touche Escape: %s", e)
+        
+        # Appeler la classe parente pour les autres touches
+        super().keyPressEvent(event)
+        
     def _update_time_label(self):
         try:
             now = QDateTime.currentDateTime()

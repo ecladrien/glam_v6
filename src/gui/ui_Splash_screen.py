@@ -22,7 +22,7 @@ class Ui_SplashScreen(object):
     def setupUi(self, SplashScreen):
         if not SplashScreen.objectName():
             SplashScreen.setObjectName(u"SplashScreen")
-        SplashScreen.resize(1027, 997)
+        SplashScreen.resize(600, 400)
         SplashScreen.setStyleSheet(u"background: black;")
         self.centralwidget = QWidget(SplashScreen)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -37,7 +37,7 @@ class Ui_SplashScreen(object):
         self.please_wait_label = QLabel(self.centralwidget)
         self.please_wait_label.setObjectName(u"please_wait_label")
         font = QFont()
-        font.setPointSize(32)
+        font.setPointSize(16)
         self.please_wait_label.setFont(font)
         self.please_wait_label.setStyleSheet(u"color: red;")
 
