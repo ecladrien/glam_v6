@@ -19,14 +19,15 @@ class MainWindow(QMainWindow):
 
     """Fenêtre principale avec gestion des signaux et slots."""
 
-    def __init__(self, config: Config | None = None):
+    def __init__(self, config: Config | None = None, fullscreen: bool = False):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.config = config
+        self.fullscreen_mode = fullscreen
 
-        # Appliquer la taille de fenêtre depuis la config si disponible
-        if config is not None:
+        # Appliquer la taille de fenêtre depuis la config si disponible (ignorée si fullscreen)
+        if config is not None and not fullscreen:
             try:
                 if getattr(config.display, "screen_width", None) and getattr(config.display, "screen_height", None):
                     self.resize(int(config.display.screen_width), int(config.display.screen_height))

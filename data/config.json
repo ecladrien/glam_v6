@@ -2,7 +2,7 @@
     "display": {
         "screen_width": 1920,
         "screen_height": 1080,
-        "fullscreen": false
+        "fullscreen": true
     },
     "hardware": {
         "arduino_port": "/dev/ttyACM0"

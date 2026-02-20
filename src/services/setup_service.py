@@ -26,6 +26,7 @@ class SetupService:
         return {
             "screen_width": int(self.config.display.screen_width),
             "screen_height": int(self.config.display.screen_height),
+            "fullscreen": bool(self.config.display.fullscreen),
             "device_ip": str(getattr(self.config.network, 'device_ip', '')),
             "camera_ip": str(getattr(self.config.network, 'camera_ip', '')),
             "artnet_network": str(getattr(self.config.network, 'artnet_network', '')),
@@ -39,6 +40,7 @@ class SetupService:
         try:
             self.config.display.screen_width = int(values.get('screen_width', self.config.display.screen_width))
             self.config.display.screen_height = int(values.get('screen_height', self.config.display.screen_height))
+            self.config.display.fullscreen = bool(values.get('fullscreen', self.config.display.fullscreen))
             self.config.network.device_ip = values.get('device_ip', self.config.network.device_ip)
             self.config.network.camera_ip = values.get('camera_ip', self.config.network.camera_ip)
             self.config.network.artnet_network = values.get('artnet_network', self.config.network.artnet_network)
@@ -54,6 +56,7 @@ class SetupService:
         default = Config()
         self.config.display.screen_width = default.display.screen_width
         self.config.display.screen_height = default.display.screen_height
+        self.config.display.fullscreen = default.display.fullscreen
         self.config.network.device_ip = default.network.device_ip
         self.config.network.camera_ip = default.network.camera_ip
         self.config.network.artnet_network = default.network.artnet_network

@@ -76,6 +76,11 @@ def main() -> None:
 
         config = Config.load_default()
         logger.info("GLAM starting")
+        
+        # Lire le mode plein écran depuis la configuration
+        fullscreen_mode = config.display.fullscreen
+        if fullscreen_mode:
+            logger.info("Plein écran activé (depuis config)")
 
         splash = _create_splash(config)
         splash.show()
@@ -85,11 +90,14 @@ def main() -> None:
 
         # Créer la fenêtre principale en lui passant la config si possible
         try:
-            window = MainWindow(config)
+            window = MainWindow(config, fullscreen=fullscreen_mode)
         except TypeError:
             window = MainWindow()
 
-        window.show()
+        if fullscreen_mode:
+            window.showFullScreen()
+        else:
+            window.show()
         splash.close()
 
         logger.info("GUI window displayed")
