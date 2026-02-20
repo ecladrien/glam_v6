@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainframedfCwxf.ui'
+## Form generated from reading UI file 'MainframeGGAOaF.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.1
 ##
@@ -31,7 +31,10 @@ class Ui_MainWindow(object):
 "")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.centralwidget.setStyleSheet(u"QPushButton {\n"
+        self.centralwidget.setStyleSheet(u"QWidget {\n"
+"    color: white;\n"
+"}\n"
+"QPushButton {\n"
 "    background-color: transparent;\n"
 "    border: 2px solid red;\n"
 "    border-radius: 6px;\n"
@@ -802,7 +805,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.main_frame.setCurrentIndex(3)
+        self.main_frame.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
