@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'MainframeocrBlY.ui'
+## Form generated from reading UI file 'MainframedfCwxf.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.10.1
 ##
@@ -417,13 +417,17 @@ class Ui_MainWindow(object):
         self.verticalLayout_5 = QVBoxLayout(self.cam_page)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.grid_cam_layout_widget = QWidget(self.cam_page)
-        self.grid_cam_layout_widget.setObjectName(u"grid_cam_layout_widget")
-        self.horizontalLayout_15 = QHBoxLayout(self.grid_cam_layout_widget)
+        self.flux_video_widget = QWidget(self.cam_page)
+        self.flux_video_widget.setObjectName(u"flux_video_widget")
+        self.horizontalLayout_15 = QHBoxLayout(self.flux_video_widget)
         self.horizontalLayout_15.setObjectName(u"horizontalLayout_15")
-        self.horizontalLayout_15.setContentsMargins(0, 0, 0, 0)
+        self.flux_video_label = QLabel(self.flux_video_widget)
+        self.flux_video_label.setObjectName(u"flux_video_label")
 
-        self.verticalLayout_5.addWidget(self.grid_cam_layout_widget)
+        self.horizontalLayout_15.addWidget(self.flux_video_label)
+
+
+        self.verticalLayout_5.addWidget(self.flux_video_widget)
 
         self.button_search_cam_widget = QWidget(self.cam_page)
         self.button_search_cam_widget.setObjectName(u"button_search_cam_widget")
@@ -431,15 +435,55 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5 = QHBoxLayout(self.button_search_cam_widget)
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.search_cam_button = QPushButton(self.button_search_cam_widget)
-        self.search_cam_button.setObjectName(u"search_cam_button")
-        self.search_cam_button.setMaximumSize(QSize(100, 100))
+        self.connect_cam_button = QPushButton(self.button_search_cam_widget)
+        self.connect_cam_button.setObjectName(u"connect_cam_button")
+        self.connect_cam_button.setMaximumSize(QSize(100, 100))
         icon11 = QIcon()
-        icon11.addFile(u":/icons/ressources/icons/search_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.search_cam_button.setIcon(icon11)
-        self.search_cam_button.setIconSize(QSize(30, 30))
+        icon11.addFile(u":/icons/ressources/icons/connect_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.connect_cam_button.setIcon(icon11)
+        self.connect_cam_button.setIconSize(QSize(30, 30))
 
-        self.horizontalLayout_5.addWidget(self.search_cam_button)
+        self.horizontalLayout_5.addWidget(self.connect_cam_button)
+
+        self.plus_zoom_cam_button = QPushButton(self.button_search_cam_widget)
+        self.plus_zoom_cam_button.setObjectName(u"plus_zoom_cam_button")
+        self.plus_zoom_cam_button.setMaximumSize(QSize(100, 100))
+        icon12 = QIcon()
+        icon12.addFile(u":/icons/ressources/icons/plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.plus_zoom_cam_button.setIcon(icon12)
+        self.plus_zoom_cam_button.setIconSize(QSize(40, 40))
+
+        self.horizontalLayout_5.addWidget(self.plus_zoom_cam_button)
+
+        self.minus_zoom_cam_button = QPushButton(self.button_search_cam_widget)
+        self.minus_zoom_cam_button.setObjectName(u"minus_zoom_cam_button")
+        self.minus_zoom_cam_button.setMaximumSize(QSize(100, 100))
+        icon13 = QIcon()
+        icon13.addFile(u":/icons/ressources/icons/minus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.minus_zoom_cam_button.setIcon(icon13)
+        self.minus_zoom_cam_button.setIconSize(QSize(40, 40))
+
+        self.horizontalLayout_5.addWidget(self.minus_zoom_cam_button)
+
+        self.full_screen_cam_button = QPushButton(self.button_search_cam_widget)
+        self.full_screen_cam_button.setObjectName(u"full_screen_cam_button")
+        self.full_screen_cam_button.setMaximumSize(QSize(100, 100))
+        icon14 = QIcon()
+        icon14.addFile(u":/icons/ressources/icons/maximize_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.full_screen_cam_button.setIcon(icon14)
+        self.full_screen_cam_button.setIconSize(QSize(40, 40))
+
+        self.horizontalLayout_5.addWidget(self.full_screen_cam_button)
+
+        self.disconnect_cam_button = QPushButton(self.button_search_cam_widget)
+        self.disconnect_cam_button.setObjectName(u"disconnect_cam_button")
+        self.disconnect_cam_button.setMaximumSize(QSize(100, 100))
+        icon15 = QIcon()
+        icon15.addFile(u":/icons/ressources/icons/disconnect_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.disconnect_cam_button.setIcon(icon15)
+        self.disconnect_cam_button.setIconSize(QSize(30, 30))
+
+        self.horizontalLayout_5.addWidget(self.disconnect_cam_button)
 
 
         self.verticalLayout_5.addWidget(self.button_search_cam_widget)
@@ -472,9 +516,9 @@ class Ui_MainWindow(object):
         self.choose_qlc_file_button.setObjectName(u"choose_qlc_file_button")
         self.choose_qlc_file_button.setMinimumSize(QSize(100, 100))
         self.choose_qlc_file_button.setMaximumSize(QSize(100, 16777215))
-        icon12 = QIcon()
-        icon12.addFile(u":/icons/ressources/icons/file-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.choose_qlc_file_button.setIcon(icon12)
+        icon16 = QIcon()
+        icon16.addFile(u":/icons/ressources/icons/file-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.choose_qlc_file_button.setIcon(icon16)
         self.choose_qlc_file_button.setIconSize(QSize(40, 40))
 
         self.qlc_form_layout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.choose_qlc_file_button)
@@ -654,9 +698,9 @@ class Ui_MainWindow(object):
         self.plan_charge_button.setMinimumSize(QSize(100, 100))
         self.plan_charge_button.setMaximumSize(QSize(100, 16777215))
         self.plan_charge_button.setStyleSheet(u"")
-        icon13 = QIcon()
-        icon13.addFile(u":/icons/ressources/icons/folder-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.plan_charge_button.setIcon(icon13)
+        icon17 = QIcon()
+        icon17.addFile(u":/icons/ressources/icons/folder-plus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.plan_charge_button.setIcon(icon17)
         self.plan_charge_button.setIconSize(QSize(30, 30))
 
         self.plan_layout.addWidget(self.plan_charge_button, 0, 1, 1, 1)
@@ -666,9 +710,9 @@ class Ui_MainWindow(object):
         self.plan_delete_button.setMinimumSize(QSize(100, 100))
         self.plan_delete_button.setMaximumSize(QSize(100, 16777215))
         self.plan_delete_button.setStyleSheet(u"")
-        icon14 = QIcon()
-        icon14.addFile(u":/icons/ressources/icons/folder-minus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.plan_delete_button.setIcon(icon14)
+        icon18 = QIcon()
+        icon18.addFile(u":/icons/ressources/icons/folder-minus_red.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        self.plan_delete_button.setIcon(icon18)
         self.plan_delete_button.setIconSize(QSize(30, 30))
 
         self.plan_layout.addWidget(self.plan_delete_button, 0, 2, 1, 1)
@@ -685,7 +729,7 @@ class Ui_MainWindow(object):
         self.background_img_choose_button.setMinimumSize(QSize(100, 100))
         self.background_img_choose_button.setMaximumSize(QSize(100, 16777215))
         self.background_img_choose_button.setStyleSheet(u"")
-        self.background_img_choose_button.setIcon(icon12)
+        self.background_img_choose_button.setIcon(icon16)
         self.background_img_choose_button.setIconSize(QSize(30, 30))
 
         self.plan_layout.addWidget(self.background_img_choose_button, 1, 1, 1, 1)
@@ -788,7 +832,12 @@ class Ui_MainWindow(object):
         self.measurement_stop_button.setText(QCoreApplication.translate("MainWindow", u"Stop", None))
         self.measurement_reset_button.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
         self.measurement_savegraph_button.setText(QCoreApplication.translate("MainWindow", u"Save CSV", None))
-        self.search_cam_button.setText(QCoreApplication.translate("MainWindow", u"Search", None))
+        self.flux_video_label.setText("")
+        self.connect_cam_button.setText(QCoreApplication.translate("MainWindow", u"Connect", None))
+        self.plus_zoom_cam_button.setText("")
+        self.minus_zoom_cam_button.setText("")
+        self.full_screen_cam_button.setText("")
+        self.disconnect_cam_button.setText(QCoreApplication.translate("MainWindow", u"Disconnect", None))
         self.path_qlc_file_label.setText(QCoreApplication.translate("MainWindow", u"Chemin fichier :", None))
         self.path_choose_qlc_file_label.setText("")
         self.choose_qlc_file_label.setText(QCoreApplication.translate("MainWindow", u"Choisir fichier :", None))

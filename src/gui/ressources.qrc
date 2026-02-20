@@ -16,6 +16,8 @@
     <file>../../ressources/icons/settings_red.svg</file>
     <file>../../ressources/icons/save_white.svg</file>
     <file>../../ressources/icons/save_red.svg</file>
+    <file>../../ressources/icons/maximize_white.svg</file>
+    <file>../../ressources/icons/maximize_red.svg</file>
     <file>../../ressources/icons/refresh-cw_white.svg</file>
     <file>../../ressources/icons/refresh-cw_red.svg</file>
     <file>../../ressources/icons/power_white.svg</file>
@@ -27,6 +29,14 @@
     <file>../../ressources/icons/home_white.svg</file>
     <file>../../ressources/icons/home_red.svg</file>
     <file>../../ressources/icons/folder-plus_white.svg</file>
+    <file>../../ressources/icons/plus_red.svg</file>
+    <file>../../ressources/icons/plus_white.svg</file>
+    <file>../../ressources/icons/minus_white.svg</file>
+    <file>../../ressources/icons/minus_red.svg</file>
+    <file>../../ressources/icons/disconnect_white.svg</file>
+    <file>../../ressources/icons/disconnect_red.svg</file>
+    <file>../../ressources/icons/connect_white.svg</file>
+    <file>../../ressources/icons/connect_red.svg</file>
     <file>../../ressources/icons/folder-plus_red.svg</file>
     <file>../../ressources/icons/folder-minus_white.svg</file>
     <file>../../ressources/icons/folder-minus_red.svg</file>

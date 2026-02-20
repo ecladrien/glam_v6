@@ -37,7 +37,7 @@ class CameraConfig(BaseModel):
     onvif_port: int = 8000
     rtsp_user: str = "admin"
     # Do not embed a plaintext default password in source; prefer env var
-    rtsp_password: SecretStr = Field(default_factory=lambda: SecretStr(os.getenv("RTSP_PASSWORD", "")))
+    rtsp_password: str ="Glam4ever:)"#rtsp_password: SecretStr = Field(default_factory=lambda: SecretStr(os.getenv("RTSP_PASSWORD", "")))
 
 class QlcConfig(BaseModel):
     qlc_folder_path: Path = Path("./ressources/qlc_files")
