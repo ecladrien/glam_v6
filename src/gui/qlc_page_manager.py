@@ -36,7 +36,8 @@ class QlcPageManager:
                 file_path, _ = QFileDialog.getOpenFileName(self.main_window,
                                                            "Choisir un fichier QLC+ (.qxw)",
                                                            str(start_dir),
-                                                           "QLC+ Project (*.qxw)")
+                                                           "QLC+ Project (*.qxw)",
+                                                           options=QFileDialog.Option.DontUseNativeDialog)
                 if file_path:
                     p = Path(file_path)
                     self.qlc_service.set_chosen_file(p)

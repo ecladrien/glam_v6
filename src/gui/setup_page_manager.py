@@ -106,6 +106,7 @@ class SetupPageManager:
                 "Ajouter des plans (images ou PDF)",
                 str(Path(".")),
                 "Plans (*.png *.jpg *.jpeg *.bmp *.pdf);;Tout (*.*)",
+                options=QFileDialog.Option.DontUseNativeDialog,
             )
             if not files:
                 return
@@ -136,6 +137,7 @@ class SetupPageManager:
                 "Sélectionner les plans à supprimer",
                 str(target_dir),
                 "Plans (*.png *.jpg *.jpeg *.bmp *.pdf);;Tout (*.*)",
+                options=QFileDialog.Option.DontUseNativeDialog,
             )
             if not files:
                 return
@@ -170,7 +172,13 @@ class SetupPageManager:
 
     def _background_img_choose_button_clicked(self):
         try:
-            fname, _ = QFileDialog.getOpenFileName(self.main_window, "Choisir une image de fond", str(Path(".")), "Images (*.png *.jpg *.jpeg *.bmp)")
+            fname, _ = QFileDialog.getOpenFileName(
+                self.main_window,
+                "Choisir une image de fond",
+                str(Path(".")),
+                "Images (*.png *.jpg *.jpeg *.bmp)",
+                options=QFileDialog.Option.DontUseNativeDialog,
+            )
             if not fname:
                 return
 

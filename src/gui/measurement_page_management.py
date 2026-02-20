@@ -176,7 +176,13 @@ class MeasurementPageManager:
                 return
             # Ask user for destination file (Save As)
             suggested_name = data_file.name
-            fname, _ = QFileDialog.getSaveFileName(self.main_window, "Enregistrer sous", suggested_name, "CSV Files (*.csv);;All Files (*.*)")
+            fname, _ = QFileDialog.getSaveFileName(
+                self.main_window,
+                "Enregistrer sous",
+                suggested_name,
+                "CSV Files (*.csv);;All Files (*.*)",
+                options=QFileDialog.Option.DontUseNativeDialog,
+            )
             if not fname:
                 return
 
