@@ -16,9 +16,13 @@ class SplashScreenWindow(QMainWindow):
         self.ui.setupUi(self)
         self.setWindowFlag(Qt.FramelessWindowHint)
         self.setWindowFlag(Qt.WindowStaysOnTopHint)
+    
+    def set_size(self, width: int, height: int) -> None:
+        """Redimensionner la fenêtre du splash screen."""
+        self.resize(width, height)
 
 
-def _create_splash(config: Config) -> SplashScreenWindow:
+def _create_splash(config: Config, splash_width: int = 600, splash_height: int = 400) -> SplashScreenWindow:
     project_root = Path(__file__).resolve().parents[1]
     splash_candidates = [
         project_root / "ressources" / "img" / "splashscreen.png",
@@ -31,8 +35,12 @@ def _create_splash(config: Config) -> SplashScreenWindow:
             break
 
     splash = SplashScreenWindow()
+    # Redimensionner le splash screen
+    splash.set_size(splash_width, splash_height)
+    
     if not pixmap.isNull():
         splash.ui.splashscreen_img.setScaledContents(True)
+
         splash.ui.splashscreen_img.setPixmap(pixmap)
     splash.ui.please_wait_label.setText("Démarrage de GLAM...")
     return splash
